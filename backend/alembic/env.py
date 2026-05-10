@@ -12,6 +12,7 @@ import app.models.trip
 import app.models.section
 import app.models.activity
 import app.models.expense
+import app.models.destination
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
