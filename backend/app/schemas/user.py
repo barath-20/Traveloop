@@ -14,7 +14,7 @@ class UserBase(BaseModel):
     avatar_url: Optional[str] = None
 
 class UserCreate(UserBase):
-    password: str = Field(..., min_length=8)
+    password: str = Field(..., min_length=8, max_length=72)
 
 class UserUpdate(BaseModel):
     first_name: Optional[str] = None
