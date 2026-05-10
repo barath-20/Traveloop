@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=DM+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary": "#ffb4a3",
+            "on-surface": "#f6ddd8",
+            "inverse-surface": "#f6ddd8",
+            "primary-fixed": "#ffdad2",
+            "inverse-primary": "#ae3115",
+            "tertiary-fixed-dim": "#e7c446",
+            "on-secondary": "#003824",
+            "surface-bright": "#453632",
+            "on-error-container": "#ffdad6",
+            "on-secondary-container": "#86c2a2",
+            "secondary": "#97d3b3",
+            "outline": "#a88a83",
+            "surface-container-low": "#261815",
+            "on-primary": "#630f00",
+            "surface-variant": "#41312e",
+            "surface-container-lowest": "#170b09",
+            "surface-container-highest": "#41312e",
+            "surface-container-high": "#352723",
+            "error-container": "#93000a",
+            "tertiary": "#e7c446",
+            "on-background": "#f6ddd8",
+            "primary-container": "#ff6b4a",
+            "outline-variant": "#59413c",
+            "on-tertiary-container": "#4d3e00",
+            "on-primary-fixed": "#3d0600",
+            "on-tertiary": "#3b2f00",
+            "on-primary-fixed-variant": "#8c1900",
+            "surface-tint": "#ffb4a3",
+            "on-error": "#690005",
+            "background": "#1d100e",
+            "on-surface-variant": "#e1bfb8",
+            "on-secondary-fixed-variant": "#135138",
+            "secondary-fixed": "#b3f0ce",
+            "secondary-fixed-dim": "#97d3b3",
+            "error": "#ffb4ab",
+            "surface": "#1d100e",
+            "surface-container": "#2a1c19",
+            "tertiary-container": "#c9a82b",
+            "surface-dim": "#1d100e",
+            "on-tertiary-fixed": "#231b00",
+            "secondary-container": "#135138",
+            "inverse-on-surface": "#3c2d29",
+            "primary-fixed-dim": "#ffb4a3",
+            "tertiary-fixed": "#ffe07c",
+            "on-secondary-fixed": "#002113",
+            "on-tertiary-fixed-variant": "#564500",
+            "on-primary-container": "#661000"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "md": "24px",
+            "sm": "12px",
+            "gutter": "24px",
+            "xl": "80px",
+            "base": "8px",
+            "margin-desktop": "64px",
+            "margin-mobile": "20px",
+            "lg": "48px",
+            "xs": "4px"
+          },
+          "fontFamily": {
+            "body-lg": ["DM Sans"],
+            "body-md": ["DM Sans"],
+            "body-sm": ["DM Sans"],
+            "display-xl": ["Playfair Display"],
+            "headline-sm": ["Playfair Display"],
+            "display-lg": ["Playfair Display"],
+            "display-lg-mobile": ["Playfair Display"],
+            "headline-md": ["Playfair Display"],
+            "label-mono": ["JetBrains Mono"]
+          },
+          "fontSize": {
+            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+            "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+            "display-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+            "display-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+            "display-lg-mobile": ["36px", {"lineHeight": "1.2", "fontWeight": "600"}],
+            "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+            "label-mono": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}]
+          }
+        }
+      }
+    }
+  </script>
+<style>.grain-overlay {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCiivn07WDB-vq5DTWvq6rZAoL0obUu8Ooim0iAEo8eWPfh0F3DCS-2WVnfP8DZzadvvWP-ubqCWbNL3wtQq7d5TU4HCkO1zGvS1_zT1BIq5v0qFDyJbGF-ZH-Rsa3acKPyl0hMTKIsCZdF6XxM8r5cIgCiGhGsi2uK4SXzgv2wvmR-OGUliLqD7kYP7SE2lDry5ar-cJINv_FLQ-f5Wk-s-sysjYQdg_rSBAfLxmhw2no6_X3EV4DKbSR66a1kOmbK7HLd-kc67XU);
+    opacity: 0.03;
+    pointer-events: none
+    }
+.sage-connector {
+    position: absolute;
+    left: 24px;
+    top: 40px;
+    bottom: -40px;
+    width: 2px;
+    background-image: linear-gradient(to bottom, #97d3b3 50%, transparent 50%);
+    background-size: 2px 12px;
+    z-index: 0
+    }
+.sage-arrow {
+    position: absolute;
+    bottom: -45px;
+    left: 17px;
+    color: #97d3b3;
+    font-size: 16px
+    }
+.coral-glow {
+    background: radial-gradient(circle at center, rgba(255, 107, 74, 0.15) 0%, rgba(255, 107, 74, 0) 70%)
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<div class="fixed inset-0 grain-overlay z-[100]"></div>
+<!-- Top AppBar -->
+<header class="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-outline-variant/10 shadow-xl shadow-background/40">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-[1200px] mx-auto w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">flight_takeoff</span>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary tracking-tight">Traveloop</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8 items-center">
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Explore</a>
+<a class="font-body-md text-primary font-bold transition-colors" href="#">Trips</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Saved</a>
+</nav>
+<div class="w-10 h-10 rounded-full border-2 border-primary/20 overflow-hidden bg-surface-container-high">
+<img alt="Profile" data-alt="A professional close-up portrait of a sophisticated traveler with a warm, welcoming expression. The lighting is soft and cinematic, highlighting natural skin textures against a blurred luxury lounge background with hints of midnight blue and coral lighting. The overall mood is high-end, editorial, and cosmopolitan." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT6VUg63HczXeuPkkmUC46Hehhe2JVfzG3KGkqUupO4OGGIWux7ZCikJ8FVn_D17_0GADvaEk8XGwgn4Wq1fpceruS13Ais2Y_fCHk9bRd6lQunWvaDj-Zoenx8lPgdQFUfN7a9pQ7PVc_FHLF43JYGLPBtII-O5UiSbAXh2PMCMt2JQvq3ZJMuNyj7fUgPS5P2hiVBBqdDfmk3j22cTTNxDrD8wdul9opdXkQte_tctYe1ASPOalewRvY-6yIlqvhcyt2olq3OiY"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-lg relative">
+<!-- Atmospheric Glow -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] coral-glow opacity-30 -z-10"></div>
+<!-- Page Header & Day Pills -->
+<div class="flex flex-col gap-lg mb-xl">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<span class="font-label-mono text-label-mono text-primary-container tracking-[0.2em] mb-2 block">ITINERARY</span>
+<h2 class="font-display-xl text-display-lg md:text-display-xl">Amalfi Coast Escape</h2>
+</div>
+<div class="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
+<button class="px-6 py-2 rounded-full bg-primary-container text-on-primary-container font-body-sm font-bold whitespace-nowrap shadow-lg shadow-primary-container/20 active:scale-95 transition-transform">Day 01</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-body-sm hover:text-primary transition-colors whitespace-nowrap">Day 02</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-body-sm hover:text-primary transition-colors whitespace-nowrap">Day 03</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-body-sm hover:text-primary transition-colors whitespace-nowrap">Day 04</button>
+</div>
+</div>
+<!-- Two-Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Activity Column -->
+<div class="lg:col-span-8 flex flex-col gap-12 relative">
+<!-- Activity 1 -->
+<div class="relative group">
+<div class="sage-connector"></div>
+<span class="material-symbols-outlined sage-arrow">keyboard_double_arrow_down</span>
+<div class="ml-16 bg-surface-container rounded-xl overflow-hidden shadow-2xl transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-primary-container/10 border border-white/5">
+<div class="flex flex-col md:flex-row">
+<div class="md:w-1/3 h-48 md:h-auto overflow-hidden">
+<img alt="Positano Breakfast" class="w-full h-full object-cover" data-alt="A luxurious breakfast spread on a white-clothed balcony overlooking the vibrant, pastel-colored buildings of Positano and the deep blue Tyrrhenian Sea. The scene is bathed in golden morning sunlight, creating long shadows and high-contrast textures. Elegant ceramic plates hold fresh fruit and croissants, evoking a high-end travel magazine aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKs_s0U4QBXTi8GKF-SSKNcxxgJcYlL2_YEHc_BBVK9pZLdDM8h2B49L2SPERDCjQKt4ZsQffr5ucEpyBMy7waySHB2Gy-Wx7IYXYUISGhU2NfrBUj-eo-Dz_U_Kbp3PWDn_pIt_b_nArqTvstsjWtdT5jgHpfaLcHV0JBGy_lRrN1NJkQeuoPdBnFXgGZQkfcxkwQwN8oBtEWWFffbNdp0oIApsgIYIYI87CHjU4P3MA8sdpQYJE1MYfe8nP4MIq6H-OhkOsLe7M"/>
+</div>
+<div class="md:w-2/3 p-6 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-mono text-primary text-[10px] tracking-widest">09:00 AM — MORNING</span>
+<h3 class="font-headline-sm text-on-surface mt-1">Sunrise Terrace Breakfast</h3>
+</div>
+<span class="material-symbols-outlined text-primary-container">restaurant</span>
+</div>
+<p class="text-on-surface-variant font-body-md leading-relaxed">Indulge in artisanal pastries and locally sourced fruits while watching the golden light hit the cliffs of Positano.</p>
+<div class="flex gap-2 mt-2">
+<span class="px-3 py-1 rounded-full bg-secondary-container/30 text-secondary text-[11px] font-bold tracking-wider">GASTRONOMY</span>
+<span class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-[11px]">HOTEL LE SIRENUSE</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity 2 -->
+<div class="relative group">
+<div class="sage-connector"></div>
+<span class="material-symbols-outlined sage-arrow">keyboard_double_arrow_down</span>
+<div class="ml-16 bg-surface-container rounded-xl overflow-hidden shadow-2xl transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-primary-container/10 border border-white/5">
+<div class="flex flex-col md:flex-row">
+<div class="md:w-1/3 h-48 md:h-auto overflow-hidden">
+<img alt="Boat Tour" class="w-full h-full object-cover" data-alt="A sleek, classic wooden Riva boat cruising through the crystal-clear turquoise waters of the Amalfi Coast near a hidden sea cave. The lighting is bright and summery, with sparkling reflections on the water surface. The composition captures the speed and elegance of high-end maritime travel in a cinematic, minimalist style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-BLONO7qR_Drgk_83vXDTrKIEu8UHdhJlyY8HCnK3bt1IHHFwdxmU2kzXl5yvNf6I0PzKRZDWDbejgIcBul60gEDKbQ5apUz1xdbZzaKuRw_dp_gcRXS931B2HMKyI_oQlh_G1AhdEKH3X7XxnbC0Pg0Qze2C-SDpkSTg7-eRULAPwYLbSKtYCepUfpqZ6Snx2dFZb6sTGY2kIHprEGVUbuvA1nbE_c9cfmQ2TIikC9wNN7Z8ppBsPJn6li_3V72_9GJ5wRcoZg0"/>
+</div>
+<div class="md:w-2/3 p-6 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-mono text-primary text-[10px] tracking-widest">11:30 AM — ADVENTURE</span>
+<h3 class="font-headline-sm text-on-surface mt-1">Private Boat to Capri</h3>
+</div>
+<span class="material-symbols-outlined text-primary-container">sailing</span>
+</div>
+<p class="text-on-surface-variant font-body-md leading-relaxed">A dedicated captain takes you on a bespoke tour through the Faraglioni rocks and hidden grottos.</p>
+<div class="flex gap-2 mt-2">
+<span class="px-3 py-1 rounded-full bg-secondary-container/30 text-secondary text-[11px] font-bold tracking-wider">PRIVATE</span>
+<span class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-[11px]">4 HOURS</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity 3 (Final for section) -->
+<div class="relative group">
+<div class="ml-16 bg-surface-container rounded-xl overflow-hidden shadow-2xl transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-primary-container/10 border border-white/5">
+<div class="flex flex-col md:flex-row">
+<div class="md:w-1/3 h-48 md:h-auto overflow-hidden">
+<img alt="Dinner" class="w-full h-full object-cover" data-alt="An intimate candle-lit dinner table set on an outdoor terrace under a canopy of blooming lemon trees. Deep navy night sky contrasts with the warm, golden glow of candles and string lights. Premium glassware and silverware catch the light, creating a moody, sophisticated, and romantic atmosphere in an Italian coastal setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuqIwO8MMgKHD2xfdCuCcz-uw0r7AnnnNU_BOUjfhasqTdKReE_ofltjHzEiIAmZcO9-UTN1OUJZH6zc9bPwIHfwbqGJ1dj6x0jJZA0_B_OTGnB2omoDZXyXdWiyaSheVzJlLubSGSelZHqTuFzqN2zOCj8GOVbpazXs7TlMCxuweYPdEQiQspdCz5TyqcCqmJV5kXUdQspmERaTQcfpTIvtJKzmx2P8ttHZ0G98ht93pYEzdBQfg3cN4erg1Qooi-LVYHc9-z1rs"/>
+</div>
+<div class="md:w-2/3 p-6 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-mono text-primary text-[10px] tracking-widest">08:00 PM — EVENING</span>
+<h3 class="font-headline-sm text-on-surface mt-1">Michelin Star Dinner</h3>
+</div>
+<span class="material-symbols-outlined text-primary-container">nightlight</span>
+</div>
+<p class="text-on-surface-variant font-body-md leading-relaxed">Reserved seating at La Sponda, featuring 400 candles and world-class Mediterranean cuisine.</p>
+<div class="flex gap-2 mt-2">
+<span class="px-3 py-1 rounded-full bg-secondary-container/30 text-secondary text-[11px] font-bold tracking-wider">RESERVED</span>
+<span class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-[11px]">POSA POSA</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Expense Column -->
+<div class="lg:col-span-4">
+<div class="sticky top-24 space-y-6">
+<div class="bg-surface-container-high rounded-xl p-6 border border-white/5">
+<h4 class="font-display-lg text-headline-sm mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">receipt_long</span>
+                Daily Expenses
+              </h4>
+<div class="space-y-4">
+<div class="flex justify-between items-center group">
+<span class="font-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Breakfast Buffet</span>
+<span class="font-label-mono text-primary-container">€ 45.00</span>
+</div>
+<div class="flex justify-between items-center group border-t border-outline-variant/10 pt-4">
+<span class="font-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Private Boat Charter</span>
+<span class="font-label-mono text-primary-container">€ 850.00</span>
+</div>
+<div class="flex justify-between items-center group border-t border-outline-variant/10 pt-4">
+<span class="font-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Dining Reservation</span>
+<span class="font-label-mono text-primary-container">€ 320.00</span>
+</div>
+<div class="flex justify-between items-center group border-t border-outline-variant/10 pt-4">
+<span class="font-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Local Transport</span>
+<span class="font-label-mono text-primary-container">€ 65.00</span>
+</div>
+</div>
+</div>
+<!-- Map Mini-Card -->
+<div class="bg-surface-container-high rounded-xl overflow-hidden border border-white/5">
+<div class="h-40 bg-surface-variant relative overflow-hidden">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&amp;fit=crop&amp;q=80&amp;w=600')] bg-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-500 cursor-crosshair"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+<div class="w-4 h-4 bg-primary-container rounded-full animate-pulse shadow-[0_0_15px_rgba(255,107,74,0.6)]"></div>
+<span class="font-label-mono text-[9px] bg-background/80 px-2 py-0.5 rounded mt-2">YOU ARE HERE</span>
+</div>
+</div>
+<div class="p-4 flex items-center justify-between">
+<span class="font-body-sm text-on-surface-variant">Positano, Italy</span>
+<button class="text-primary-container font-label-mono text-[11px] uppercase tracking-tighter hover:underline">View Map</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Sticky Bottom Budget Summary -->
+<footer class="fixed bottom-0 left-0 w-full z-40">
+<div class="bg-surface-container/90 backdrop-blur-lg border-t border-outline-variant/10 shadow-[0_-8px_32px_rgba(0,0,0,0.4)] px-margin-mobile md:px-margin-desktop py-4">
+<div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex gap-8 md:gap-16">
+<div class="flex flex-col">
+<span class="font-label-mono text-[10px] text-on-surface-variant/60 tracking-widest">DAY TOTAL</span>
+<span class="font-label-mono text-xl text-primary-container">€ 1,280.00</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-mono text-[10px] text-on-surface-variant/60 tracking-widest">TRIP BUDGET</span>
+<span class="font-label-mono text-xl text-primary">€ 5,420.00 / € 8,000</span>
+</div>
+</div>
+<button class="w-full md:w-auto bg-primary text-on-primary px-8 py-3 rounded-full font-body-sm font-bold shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
+          Generate PDF Report
+        </button>
+</div>
+</div>
+</footer>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-20 left-0 w-full z-50 flex justify-around items-center h-16 px-4 bg-surface-container-high/50 backdrop-blur-md border-t border-white/5">
+<div class="flex flex-col items-center justify-center text-on-surface-variant opacity-70">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-[10px] font-label-mono mt-1">EXPLORE</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary bg-primary-container/10 rounded-full px-5 py-1">
+<span class="material-symbols-outlined">map</span>
+<span class="text-[10px] font-label-mono mt-1">TRIPS</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant opacity-70">
+<span class="material-symbols-outlined">favorite</span>
+<span class="text-[10px] font-label-mono mt-1">SAVED</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant opacity-70">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-label-mono mt-1">PROFILE</span>
+</div>
+</nav>
+<div class="h-40 md:h-24"></div> <!-- Spacer for fixed footer -->
+</body></html>

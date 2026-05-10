@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,600&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#ffb4a3",
+                    "on-surface": "#f6ddd8",
+                    "inverse-surface": "#f6ddd8",
+                    "primary-fixed": "#ffdad2",
+                    "inverse-primary": "#ae3115",
+                    "tertiary-fixed-dim": "#e7c446",
+                    "on-secondary": "#003824",
+                    "surface-bright": "#453632",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-container": "#86c2a2",
+                    "secondary": "#97d3b3",
+                    "outline": "#a88a83",
+                    "surface-container-low": "#261815",
+                    "on-primary": "#630f00",
+                    "surface-variant": "#41312e",
+                    "surface-container-lowest": "#170b09",
+                    "surface-container-highest": "#41312e",
+                    "surface-container-high": "#352723",
+                    "error-container": "#93000a",
+                    "tertiary": "#e7c446",
+                    "on-background": "#f6ddd8",
+                    "primary-container": "#ff6b4a",
+                    "outline-variant": "#59413c",
+                    "on-tertiary-container": "#4d3e00",
+                    "on-primary-fixed": "#3d0600",
+                    "on-tertiary": "#3b2f00",
+                    "on-primary-fixed-variant": "#8c1900",
+                    "surface-tint": "#ffb4a3",
+                    "on-error": "#690005",
+                    "background": "#1d100e",
+                    "on-surface-variant": "#e1bfb8",
+                    "on-secondary-fixed-variant": "#135138",
+                    "secondary-fixed": "#b3f0ce",
+                    "secondary-fixed-dim": "#97d3b3",
+                    "error": "#ffb4ab",
+                    "surface": "#1d100e",
+                    "surface-container": "#2a1c19",
+                    "tertiary-container": "#c9a82b",
+                    "surface-dim": "#1d100e",
+                    "on-tertiary-fixed": "#231b00",
+                    "secondary-fixed-dim": "#97d3b3",
+                    "inverse-on-surface": "#3c2d29",
+                    "primary-fixed-dim": "#ffb4a3",
+                    "tertiary-fixed": "#ffe07c",
+                    "on-secondary-fixed": "#002113",
+                    "on-tertiary-fixed-variant": "#564500",
+                    "on-primary-container": "#661000"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "24px",
+                    "sm": "12px",
+                    "gutter": "24px",
+                    "xl": "80px",
+                    "base": "8px",
+                    "margin-desktop": "64px",
+                    "margin-mobile": "20px",
+                    "lg": "48px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "body-lg": ["DM Sans"],
+                    "body-md": ["DM Sans"],
+                    "body-sm": ["DM Sans"],
+                    "display-xl": ["Playfair Display"],
+                    "headline-sm": ["Playfair Display"],
+                    "display-lg": ["Playfair Display"],
+                    "display-lg-mobile": ["Playfair Display"],
+                    "headline-md": ["Playfair Display"],
+                    "label-mono": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-mono": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    display: inline-block;
+    line-height: 1
+    }
+.glass-card {
+    background: rgba(42, 28, 25, 0.6);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.05)
+    }
+.grain-overlay {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBR_M7NKGBwdXROb2aUQ_HyQogzbqjRf-P5mXWn91EwjF6vALiOdwAIMMusmw84jHvdPGRFA6T2Qkv8MItF9H9fQ9ZIMC_eKYJ6GnSoRzeacVZTDfNV96gjsmMkQ1Lmi5Qn0kgsxVmaiPCY19CND-mxJbt6fV2gVENiwtBWabVw6VE6aTsQvF4ZN-YefWLnFRhZ_bRzih9JjswhsskQjao7Nz1KdgrvRBz8vNd1eUKNCVAXzYAm5iyZqEK5fREi-9kW1t8tz2DjqDU);
+    opacity: 0.03;
+    pointer-events: none
+    }
+.connector-line {
+    background: linear-gradient(90deg, transparent, #97d3b3, transparent);
+    height: 2px;
+    width: 100%
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen font-body-md selection:bg-primary-container/30">
+<div class="fixed inset-0 grain-overlay z-50"></div>
+<!-- Top AppBar -->
+<header class="bg-background/80 dark:bg-background/80 backdrop-blur-md border-b border-outline-variant/10 shadow-xl shadow-background/40 docked full-width top-0 sticky z-40">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-[1200px] mx-auto w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-3xl">flight_takeoff</span>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary tracking-tight">Traveloop</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8 items-center">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body-sm" href="#">Explore</a>
+<a class="text-primary font-bold transition-colors duration-300 font-body-sm" href="#">Trips</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body-sm" href="#">Saved</a>
+</nav>
+<div class="w-10 h-10 rounded-full border-2 border-primary/20 p-0.5 overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover rounded-full" data-alt="A sophisticated close-up portrait of a well-groomed man with a soft, friendly expression, set against a blurred editorial background. The lighting is warm and cinematic, emphasizing a premium travel lifestyle. The aesthetic is refined and professional, fitting the 'Midnight Editorial' design system with high-contrast but soft tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhtGw0MHByejPhNnv_1mdKuNc1zY92-1atSDCYkQ8abfLVuIrb7IGHKveKifHY8m7bdR3pr2TTgdIatofUZ_5F3ss7YlhjTp5nm4CCxfEkHEerW86mL1ZEi9WpWThOlcVYYidor2KyFsW2MCD4J4E11GmL5E8zqZJZT0hcTaYUKxBcKTbLgoNF379uAyTqgQIPWGVvZ07sVDfAk95hpXTgHBwtWxkhF82mwzIPrueHbXcB-Y1jtdX6vbQgRiIe1yEngwdcv1DhX_w"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-10 pb-32">
+<!-- Toolbar & Back Link -->
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+<div class="flex items-center gap-2 group cursor-pointer">
+<span class="material-symbols-outlined text-primary group-hover:-translate-x-1 transition-transform">arrow_back</span>
+<span class="font-body-md text-on-surface-variant group-hover:text-primary transition-colors">Back to Amalfi Coast Trip</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="bg-surface-container-high px-4 py-2 rounded-full border border-outline-variant/20 flex items-center gap-2 text-on-surface-variant text-sm">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+<span>All Expenses</span>
+</div>
+<div class="bg-surface-container-high px-4 py-2 rounded-full border border-outline-variant/20 flex items-center gap-2 text-on-surface-variant text-sm">
+<span class="material-symbols-outlined text-sm">calendar_month</span>
+<span>July 2024</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left: Invoice Card -->
+<div class="lg:col-span-8 glass-card rounded-2xl overflow-hidden shadow-2xl relative">
+<!-- Atmospheric Glow Behind Card Header -->
+<div class="absolute top-0 left-0 w-full h-32 bg-primary-container/5 -z-10 blur-3xl"></div>
+<div class="p-8 md:p-12">
+<div class="flex flex-col md:flex-row justify-between mb-12 gap-8">
+<div>
+<h2 class="font-headline-md text-primary mb-2">Invoice #TL-8842</h2>
+<p class="text-on-surface-variant font-body-sm">Billed to: Elena Rodriguez</p>
+<p class="text-on-surface-variant font-body-sm">Amalfi Coast Itinerary</p>
+</div>
+<div class="text-right">
+<div class="text-on-surface-variant font-label-mono mb-1">DATE ISSUED</div>
+<div class="text-on-surface font-body-md">July 14, 2024</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant/30">
+<th class="py-4 font-label-mono text-on-surface-variant uppercase tracking-widest text-[10px]">Description</th>
+<th class="py-4 font-label-mono text-on-surface-variant uppercase tracking-widest text-[10px]">Category</th>
+<th class="py-4 font-label-mono text-on-surface-variant uppercase tracking-widest text-[10px] text-right">Amount</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr>
+<td class="py-6">
+<div class="font-body-md text-on-surface">Private Yacht Charter</div>
+<div class="text-xs text-on-surface-variant">Positano to Capri Full Day</div>
+</td>
+<td class="py-6">
+<span class="bg-secondary-container/20 text-secondary border border-secondary/20 px-3 py-1 rounded-full text-xs">Transportation</span>
+</td>
+<td class="py-6 text-right font-body-md">€1,200.00</td>
+</tr>
+<tr>
+<td class="py-6">
+<div class="font-body-md text-on-surface">La Sponda Dining</div>
+<div class="text-xs text-on-surface-variant">Michelin-star dinner service</div>
+</td>
+<td class="py-6">
+<span class="bg-tertiary-container/20 text-tertiary border border-tertiary/20 px-3 py-1 rounded-full text-xs">Dining</span>
+</td>
+<td class="py-6 text-right font-body-md">€450.00</td>
+</tr>
+<tr>
+<td class="py-6">
+<div class="font-body-md text-on-surface">Luxury Villa Stay</div>
+<div class="text-xs text-on-surface-variant">Hotel Santa Caterina (3 nights)</div>
+</td>
+<td class="py-6">
+<span class="bg-primary-container/10 text-primary border border-primary/20 px-3 py-1 rounded-full text-xs">Lodging</span>
+</td>
+<td class="py-6 text-right font-body-md">€2,850.00</td>
+</tr>
+</tbody>
+<tfoot>
+<tr class="bg-primary-container text-on-primary-container">
+<td class="py-5 px-8 rounded-l-xl font-headline-sm" colspan="2">Grand Total</td>
+<td class="py-5 px-8 rounded-r-xl text-right font-headline-sm">€4,500.00</td>
+</tr>
+</tfoot>
+</table>
+</div>
+<div class="mt-12 pt-8 border-t border-outline-variant/20">
+<div class="connector-line mb-8 opacity-20"></div>
+<p class="text-xs text-on-surface-variant italic leading-relaxed">
+                            Payment is due within 15 days of issuance. This invoice was automatically generated based on your Traveloop concierge bookings and verified expenses during your Amalfi excursion. For disputes, please contact your private agent.
+                        </p>
+</div>
+</div>
+</div>
+<!-- Right: Budget Insights -->
+<div class="lg:col-span-4 space-y-gutter">
+<div class="glass-card rounded-2xl p-8 shadow-xl">
+<h3 class="font-headline-sm text-on-surface mb-8">Budget Insights</h3>
+<!-- Donut Chart Placeholder -->
+<div class="relative w-48 h-48 mx-auto mb-8">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<!-- Background Track -->
+<circle class="text-surface-container-highest" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+<!-- Spent Indicator (Coral) -->
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#ff6b4a" stroke-dasharray="251.2" stroke-dashoffset="50.2" stroke-linecap="round" stroke-width="10"></circle>
+<!-- Remaining (Sage) -->
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#97d3b3" stroke-dasharray="251.2" stroke-dashoffset="201" stroke-linecap="round" stroke-width="6"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-label-mono text-primary-container text-lg">€4,500</span>
+<span class="text-[10px] text-on-surface-variant uppercase tracking-widest">SPENT</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center pb-4 border-b border-outline-variant/10">
+<span class="text-on-surface-variant text-sm">Monthly Budget</span>
+<span class="text-on-surface font-body-md">€4,000.00</span>
+</div>
+<div class="flex justify-between items-center pb-4 border-b border-outline-variant/10">
+<span class="text-on-surface-variant text-sm">Trip Allocation</span>
+<span class="text-on-surface font-body-md">€5,000.00</span>
+</div>
+<div class="p-4 bg-error-container/10 border border-error/20 rounded-xl flex items-start gap-3">
+<span class="material-symbols-outlined text-error text-xl">warning</span>
+<div>
+<div class="text-error font-body-sm font-bold">Over Budget Alert</div>
+<p class="text-error/80 text-xs">You are €500 over your planned monthly travel limit.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="glass-card rounded-2xl p-8">
+<h4 class="font-label-mono text-xs text-on-surface-variant uppercase tracking-widest mb-4">Quick Stats</h4>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 bg-surface-container-low rounded-xl">
+<div class="text-primary font-display-lg text-2xl">14</div>
+<div class="text-[10px] text-on-surface-variant uppercase">EXPENSES</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-xl">
+<div class="text-secondary font-display-lg text-2xl">3</div>
+<div class="text-[10px] text-on-surface-variant uppercase">VENDORS</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Action Row -->
+<div class="fixed bottom-0 left-0 w-full bg-surface-container/90 backdrop-blur-lg border-t border-outline-variant/10 z-40 px-margin-mobile md:px-margin-desktop py-4">
+<div class="max-w-[1200px] mx-auto flex flex-wrap justify-between items-center gap-4">
+<div class="flex gap-2">
+<button class="bg-surface-container-highest hover:bg-surface-variant text-on-surface px-6 py-3 rounded-full flex items-center gap-2 transition-all active:scale-95 text-sm font-medium">
+<span class="material-symbols-outlined">download</span>
+                    Download PDF
+                </button>
+<button class="bg-surface-container-highest hover:bg-surface-variant text-on-surface px-6 py-3 rounded-full flex items-center gap-2 transition-all active:scale-95 text-sm font-medium">
+<span class="material-symbols-outlined">share</span>
+                    Export CSV
+                </button>
+</div>
+<button class="bg-primary-container hover:shadow-lg hover:shadow-primary-container/20 text-on-primary-container px-10 py-3 rounded-full flex items-center gap-2 transition-all active:scale-95 font-bold">
+<span class="material-symbols-outlined">check_circle</span>
+                Mark as Paid
+            </button>
+</div>
+</div>
+<!-- Background Elements -->
+<div class="fixed top-1/4 -right-20 w-96 h-96 bg-primary-container/10 rounded-full blur-[120px] -z-10"></div>
+<div class="fixed bottom-1/4 -left-20 w-80 h-80 bg-secondary/10 rounded-full blur-[100px] -z-10"></div>
+</body></html>

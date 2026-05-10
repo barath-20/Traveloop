@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=DM+Sans:wght@400;500;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .grain-texture {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+        }
+        .coral-glow {
+            background: radial-gradient(circle at center, rgba(255, 107, 74, 0.15) 0%, rgba(255, 107, 74, 0) 70%);
+        }
+        .glass-sheet {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#ffb4a3",
+                    "on-surface": "#f6ddd8",
+                    "inverse-surface": "#f6ddd8",
+                    "primary-fixed": "#ffdad2",
+                    "inverse-primary": "#ae3115",
+                    "tertiary-fixed-dim": "#e7c446",
+                    "on-secondary": "#003824",
+                    "surface-bright": "#453632",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-container": "#86c2a2",
+                    "secondary": "#97d3b3",
+                    "outline": "#a88a83",
+                    "surface-container-low": "#261815",
+                    "on-primary": "#630f00",
+                    "surface-variant": "#41312e",
+                    "surface-container-lowest": "#170b09",
+                    "surface-container-highest": "#41312e",
+                    "surface-container-high": "#352723",
+                    "error-container": "#93000a",
+                    "tertiary": "#e7c446",
+                    "on-background": "#f6ddd8",
+                    "primary-container": "#ff6b4a",
+                    "outline-variant": "#59413c",
+                    "on-tertiary-container": "#4d3e00",
+                    "on-primary-fixed": "#3d0600",
+                    "on-tertiary": "#3b2f00",
+                    "on-primary-fixed-variant": "#8c1900",
+                    "surface-tint": "#ffb4a3",
+                    "on-error": "#690005",
+                    "background": "#1d100e",
+                    "on-surface-variant": "#e1bfb8",
+                    "on-secondary-fixed-variant": "#135138",
+                    "secondary-fixed": "#b3f0ce",
+                    "secondary-fixed-dim": "#97d3b3",
+                    "error": "#ffb4ab",
+                    "surface": "#1d100e",
+                    "surface-container": "#2a1c19",
+                    "tertiary-container": "#c9a82b",
+                    "surface-dim": "#1d100e",
+                    "on-tertiary-fixed": "#231b00",
+                    "secondary-container": "#135138",
+                    "inverse-on-surface": "#3c2d29",
+                    "primary-fixed-dim": "#ffb4a3",
+                    "tertiary-fixed": "#ffe07c",
+                    "on-secondary-fixed": "#002113",
+                    "on-tertiary-fixed-variant": "#564500",
+                    "on-primary-container": "#661000"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "24px",
+                    "sm": "12px",
+                    "gutter": "24px",
+                    "xl": "80px",
+                    "base": "8px",
+                    "margin-desktop": "64px",
+                    "margin-mobile": "20px",
+                    "lg": "48px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "body-lg": ["DM Sans"],
+                    "body-md": ["DM Sans"],
+                    "body-sm": ["DM Sans"],
+                    "display-xl": ["Playfair Display"],
+                    "headline-sm": ["Playfair Display"],
+                    "display-lg": ["Playfair Display"],
+                    "display-lg-mobile": ["Playfair Display"],
+                    "headline-md": ["Playfair Display"],
+                    "label-mono": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-mono": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<div class="fixed inset-0 grain-texture z-[9999]"></div>
+<!-- TopAppBar -->
+<header class="bg-background/80 dark:bg-background/80 backdrop-blur-md text-primary dark:text-primary docked full-width top-0 sticky shadow-xl shadow-background/40 border-b border-outline-variant/10 z-50">
+<nav class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-[1200px] mx-auto w-full">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container" data-icon="flight_takeoff">flight_takeoff</span>
+<h1 class="font-display-lg text-display-lg-mobile text-primary dark:text-primary tracking-tight">Traveloop</h1>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body-md" href="#">Explore</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body-md" href="#">Trips</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body-md" href="#">Saved</a>
+<a class="text-primary font-bold transition-colors duration-300 font-body-md" href="#">Profile</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full border-2 border-primary-container p-0.5 overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover rounded-full" data-alt="A sophisticated portrait of a well-traveled woman with elegant features, photographed in soft, warm golden hour lighting against a blurred Parisian architectural background. The image has a cinematic quality with deep contrast and a premium editorial feel, aligning with a high-end travel brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNQCpQ68VuSAFBuOCLiRS5ei0llUQiu4WqaKha3BoAN_kxr02XX0c_ZkFmFRZAs8qjcSOVJ7IgqzKk_U8tmMCZqlinR4f6u1tplEze03npMCIZFEtONqG5Vm2P2KYpWrMWCXdgrgYuopDv8jVisRKT2wXsSgMhxBemRbcUFiNImEFPqd4ko5s_Tag4d9lMAi12QIIlyBDcfS6LB17qDB0cAue34xfcu_vyoMtybPzc8omcdOr38ENlXeycB-0U4PabZxzLq3qFZ0c"/>
+</div>
+</div>
+</nav>
+</header>
+<main class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-lg relative">
+<!-- Hero Background Glow -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] coral-glow -z-10"></div>
+<!-- Profile Hero Card -->
+<section class="bg-surface-container rounded-xl p-8 mb-xl shadow-2xl relative overflow-hidden">
+<div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+<!-- Avatar with Coral Ring -->
+<div class="relative">
+<div class="w-[100px] h-[100px] rounded-full border-4 border-primary-container p-1 bg-background shadow-[0_0_20px_rgba(255,107,74,0.3)]">
+<img alt="Avatar" class="w-full h-full object-cover rounded-full" data-alt="Close up profile picture of a stylish professional traveler in her late 20s, wearing classic minimal jewelry, illuminated by the warm, amber glow of a setting sun. The background consists of dark, blurred textures that emphasize her clear, focused expression and the luxury editorial mood of the brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuiVOA4MuAkRaMzuvqj821cxyvWCFf5hqjWKe9i37kApbvu_U2sRlBVgoTtuXBcG_TQMr0M3OwkdrERbVSctjPzYh_GfxBAk7f3TN-9_ftQCuVnUBdNMqUu3wGGfs8ibiquEPSbl5mVotVROrbETP5tWjoG8Ch3WFtIybNAOfGrL1YkgIkvMS318RxSxCDHbzxeHB-CYQj5b_OKaWvmtZYz74zmJCOo_YZI8GmqVGwlomK1i-NP7_mMFg7tODWLDz9oaCRIzFDSDs"/>
+</div>
+</div>
+<div class="flex-1 text-center md:text-left space-y-4">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Elena Rodriguez</h2>
+<p class="text-on-surface-variant font-body-md">Luxury Explorer &amp; Cultural Curator</p>
+</div>
+<button class="px-6 py-2 border-[1.5px] border-primary-container text-primary-container rounded-full font-body-md hover:bg-primary-container/10 transition-all active:scale-95">
+                            Edit Profile
+                        </button>
+</div>
+<!-- Stats Row -->
+<div class="flex flex-wrap justify-center md:justify-start gap-4 mt-6">
+<div class="bg-surface-container-low px-6 py-3 rounded-full flex items-center gap-3 border border-outline-variant/10">
+<span class="text-primary-container font-bold text-headline-sm">24</span>
+<span class="text-on-surface-variant text-body-sm tracking-wide uppercase font-label-mono">Trips</span>
+</div>
+<div class="bg-surface-container-low px-6 py-3 rounded-full flex items-center gap-3 border border-outline-variant/10">
+<span class="text-primary-container font-bold text-headline-sm">18</span>
+<span class="text-on-surface-variant text-body-sm tracking-wide uppercase font-label-mono">Countries</span>
+</div>
+<div class="bg-surface-container-low px-6 py-3 rounded-full flex items-center gap-3 border border-outline-variant/10">
+<span class="text-primary-container font-bold text-headline-sm">3</span>
+<span class="text-on-surface-variant text-body-sm tracking-wide uppercase font-label-mono">Upcoming</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Preplanned Trips Section -->
+<section class="mb-xl">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Preplanned Trips</h3>
+<a class="text-primary text-body-sm font-bold flex items-center gap-1 hover:underline" href="#">
+                    View all <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[4/5] rounded-xl overflow-hidden mb-4 shadow-lg transition-transform duration-500 group-hover:-translate-y-2">
+<img alt="London" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A moody, cinematic shot of London at dusk, featuring the classic red buses blurred in motion crossing Westminster Bridge with the majestic Big Ben tower in the background. The sky is a deep twilight navy, and the city lights sparkle with a warm golden glow, echoing the brand's sophisticated and worldly aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHa4lWf3N9FA4V36WtLjO7LFvURRL4Cj5RBfx-HmpMuegRC4Nziq-Z-9yG6vMALyQcFIKOlwqrwMex4FFy-FR7Jxtkxl_DLqWj5rUUxang0aNUIoP6lD0XiS-UqyfBdCewfi-5w658r6Pp6CN1RzJu2pULYMTc8aoPAy739_lSqgeqNE-EYvFWjW1c_Tpnm7BdSLTSo76kDrES-B4_cP4QVavnDbjW_XxFDTDvNQNW6116ms1nNibEv3crecE6Mr5YI50tvFK30H4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<span class="text-label-mono text-primary-container bg-primary-container/10 px-2 py-1 rounded mb-2 inline-block">SEP 2024</span>
+<h4 class="text-on-surface font-headline-sm">London Fog &amp; Tea</h4>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[4/5] rounded-xl overflow-hidden mb-4 shadow-lg transition-transform duration-500 group-hover:-translate-y-2">
+<img alt="Venice" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A serene view of a gondola resting on the calm, reflective waters of a Venice canal during the blue hour. Ancient stone buildings with shuttered windows line the waterway, illuminated by soft street lamps. The scene captures a timeless, romantic atmosphere with deep shadows and vibrant navy and teal tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkiw2HVADDu8FAgRXNHkid0PbsXNDI1CUKmSypuutEaKcj9Wj6eVGCUR1EeCbDoBvVNwHPZQvHo-dPViTRZTv-1-ILWiTndKXgNCpGBC-_ew3IIv_7bd1oFDd33oaao5WWnLpRG21llMhvsRlBUF4-x2Qew6gb19DpIb4e6PJQeRykNQHPm0LnwLzHRMf8iQIFw7HoOK7nMnq1o2lnoxiENuhN4crsklf2UDpSMOfHMc7nm0dTk3BJKy8kKjpHgBpzbxopJNtX9ao"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<span class="text-label-mono text-primary-container bg-primary-container/10 px-2 py-1 rounded mb-2 inline-block">OCT 2024</span>
+<h4 class="text-on-surface font-headline-sm">Venetian Serenade</h4>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[4/5] rounded-xl overflow-hidden mb-4 shadow-lg transition-transform duration-500 group-hover:-translate-y-2">
+<img alt="Kyoto" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A minimalist architectural shot of a traditional Japanese tea house in Kyoto, surrounded by vibrant autumn maple leaves in shades of deep red and coral. The soft, diffused morning light highlights the clean wooden lines and the peaceful, zen-like atmosphere of the garden, presented in a high-end travel journalism style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKP5wetvV7wl2LXnK8hr2-PhTQw1Mpxq1kkhpwiSf0Fwvr6QcyJYYOnUTAWj1dv_blJx7zgTgRNay4pe_RMqwl5Q3JvnZFsUECuCP3N7hi3NfXexTyUQZNFndyOPvpMJOvebBlfzncOi2rW7H6ghg-gRPebrSPvqxFAbx3aGjspWpo5i7LME-56R5GXGSeutlo8bs874YWI8A_4dEl98C6KNkOUDjQzDr529DuGRImNsCm9pJPzkR_c9GbQkwOdkHENlwDcILd4hg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<span class="text-label-mono text-primary-container bg-primary-container/10 px-2 py-1 rounded mb-2 inline-block">NOV 2024</span>
+<h4 class="text-on-surface font-headline-sm">Zen Gardens Kyoto</h4>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Previous Trips Section -->
+<section class="mb-xl">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Previous Trips</h3>
+<span class="text-on-surface-variant font-label-mono uppercase tracking-widest text-xs">2023 Archive</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Previous Card 1 -->
+<div class="glass-sheet p-3 rounded-xl group hover:border-primary-container/30 transition-all">
+<div class="aspect-square rounded-lg overflow-hidden mb-4">
+<img alt="Maldives" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Luxury overwater villas in the Maldives at twilight, with the glowing turquoise ocean water contrasting against the deep navy evening sky. The lighting is sophisticated and atmospheric, emphasizing the premium concierge experience and the serene, expansive nature of a tropical paradise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwwQbo9XTlmNwnXTM9j5adBnal-HJZxt8hDuuPZe-qq2-eHjiRISs3ULQJPo1mNNotwWp3naH-_RROPp4xcEo-T-BJUBQ34CxEm9vo682ZGPqSnnBzYMpd34tFzVnzzwSmeYTbQZulGMqlfMSSJu4C2-gWkStKV4YiRVw_mZSP9O3wbQMM3bT-kbr0XFJ08EO5GkQtDT98Q0vArjV8k35r_0Pa4Ep_ucMWUu7PLj8qE37elL08LFzN88L0z72MPUb3CvZlhWHtcZA"/>
+</div>
+<div class="px-2 pb-2">
+<h5 class="text-on-surface font-body-lg font-bold">Maldives Retreat</h5>
+<p class="text-on-surface-variant text-body-sm">February 2023 • 12 days</p>
+</div>
+</div>
+<!-- Previous Card 2 -->
+<div class="glass-sheet p-3 rounded-xl group hover:border-primary-container/30 transition-all">
+<div class="aspect-square rounded-lg overflow-hidden mb-4">
+<img alt="Paris" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A sophisticated architectural detail of the Eiffel Tower framed by elegant Haussmann-style buildings in Paris. The image is shot in a monochromatic palette with deep contrasts, emphasizing the timeless and worldly character of the city, perfectly aligned with luxury travel aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8SvdwUqEBDeMXpDZdAoZRD7x1ujKU-7lVA8OFNlaey7wfLQgfgXToiLJ794xHhLDuus1EPdyPbXJ5_9l_1e0KRS6PkvJ1nkFI6yApgxwDr7L5ZdRT5gaRZmbZOVFJjaYB_1YZYRUs0w57jhI2Jcp-0ucnxTloFL2slw6f6Kov3glpa-CEvQLVGcD74sNdaKUbWJKJYgkT7QIp2FIPhOfht6Kpf99GdrZ1sgWcOUmH6J67X60xPzUI6XGBvAR6qIYyJYvUrc1jkf4"/>
+</div>
+<div class="px-2 pb-2">
+<h5 class="text-on-surface font-body-lg font-bold">Parisian Spring</h5>
+<p class="text-on-surface-variant text-body-sm">April 2023 • 7 days</p>
+</div>
+</div>
+<!-- Previous Card 3 -->
+<div class="glass-sheet p-3 rounded-xl group hover:border-primary-container/30 transition-all">
+<div class="aspect-square rounded-lg overflow-hidden mb-4">
+<img alt="Swiss Alps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A majestic panorama of the Swiss Alps, with snow-capped peaks piercing a dramatic cloud layer. The lighting is crisp and cool, highlighting the jagged textures of the mountains and the vast, open-world feeling of high-altitude exploration. The aesthetic is clean, technical, and awe-inspiring." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYqlo0w9wJhfLdv6-b9HsndTQoV4Tt5BB8mNzKNV4xttXu93YZeff7UlShLEUXdXpqqQY1DW8MVDSTceKIy2B3me96fnnS8WOlWQi5OK9iTyscqZ7xgdGjZJ8I2TjB60Yi6m-guyLgb1FlKGeMT83ZW0HVJjwYQbPOsuPEIrqKSmTcxwmm9o2Kl5VLPXFikNl4Mnb5EHxUDSUY9IB639_48OJYrrI9-X0pP3vRufVy9MkRUPPewGNDdw3sc1tylp8bMDjB3_HLw60"/>
+</div>
+<div class="px-2 pb-2">
+<h5 class="text-on-surface font-body-lg font-bold">Alpine Escape</h5>
+<p class="text-on-surface-variant text-body-sm">December 2023 • 5 days</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Logout Section -->
+<footer class="mt-xl border-t border-outline-variant/10 pt-10 pb-20 text-center">
+<button class="text-error flex items-center gap-2 mx-auto font-body-md hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Logout from Traveloop
+            </button>
+<p class="text-on-surface-variant/40 text-body-sm mt-6 font-label-mono">Version 2.4.0 • Midnight Editorial Engine</p>
+</footer>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-4 pb-2 bg-surface-container/90 dark:bg-surface-container/90 backdrop-blur-lg border-t border-outline-variant/10 shadow-[0_-8px_32px_rgba(0,0,0,0.4)] md:hidden">
+<div class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 hover:text-primary transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-body-sm text-body-sm tracking-wide">Explore</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 hover:text-primary transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-body-sm text-body-sm tracking-wide">Trips</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 hover:text-primary transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-body-sm text-body-sm tracking-wide">Saved</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary bg-primary-container/10 rounded-full px-4 py-1 scale-110 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="person" data-weight="fill">person</span>
+<span class="font-body-sm text-body-sm tracking-wide">Profile</span>
+</div>
+</nav>
+<script>
+        // Custom Material Icons weight handler
+        document.querySelectorAll('.material-symbols-outlined').forEach(icon => {
+            if (icon.getAttribute('data-weight') === 'fill') {
+                icon.style.fontVariationSettings = "'FILL' 1";
+            }
+        });
+    </script>
+</body></html>

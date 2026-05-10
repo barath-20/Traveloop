@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Traveloop - My Trips</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-image: radial-gradient(circle at 50% 0%, rgba(255, 107, 74, 0.05) 0%, transparent 50%), 
+                              url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-attachment: fixed;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#ffb4a3",
+                    "on-surface": "#f6ddd8",
+                    "inverse-surface": "#f6ddd8",
+                    "primary-fixed": "#ffdad2",
+                    "inverse-primary": "#ae3115",
+                    "tertiary-fixed-dim": "#e7c446",
+                    "on-secondary": "#003824",
+                    "surface-bright": "#453632",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-container": "#86c2a2",
+                    "secondary": "#97d3b3",
+                    "outline": "#a88a83",
+                    "surface-container-low": "#261815",
+                    "on-primary": "#630f00",
+                    "surface-variant": "#41312e",
+                    "surface-container-lowest": "#170b09",
+                    "surface-container-highest": "#41312e",
+                    "surface-container-high": "#352723",
+                    "error-container": "#93000a",
+                    "tertiary": "#e7c446",
+                    "on-background": "#f6ddd8",
+                    "primary-container": "#ff6b4a",
+                    "outline-variant": "#59413c",
+                    "on-tertiary-container": "#4d3e00",
+                    "on-primary-fixed": "#3d0600",
+                    "on-tertiary": "#3b2f00",
+                    "on-primary-fixed-variant": "#8c1900",
+                    "surface-tint": "#ffb4a3",
+                    "on-error": "#690005",
+                    "background": "#1d100e",
+                    "on-surface-variant": "#e1bfb8",
+                    "on-secondary-fixed-variant": "#135138",
+                    "secondary-fixed": "#b3f0ce",
+                    "secondary-fixed-dim": "#97d3b3",
+                    "error": "#ffb4ab",
+                    "surface": "#1d100e",
+                    "surface-container": "#2a1c19",
+                    "tertiary-container": "#c9a82b",
+                    "surface-dim": "#1d100e",
+                    "on-tertiary-fixed": "#231b00",
+                    "secondary-fixed-dim": "#97d3b3",
+                    "inverse-on-surface": "#3c2d29",
+                    "primary-fixed-dim": "#ffb4a3",
+                    "tertiary-fixed": "#ffe07c",
+                    "on-secondary-fixed": "#002113",
+                    "on-tertiary-fixed-variant": "#564500",
+                    "on-primary-container": "#661000"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "24px",
+                    "sm": "12px",
+                    "gutter": "24px",
+                    "xl": "80px",
+                    "base": "8px",
+                    "margin-desktop": "64px",
+                    "margin-mobile": "20px",
+                    "lg": "48px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "body-lg": ["DM Sans"],
+                    "body-md": ["DM Sans"],
+                    "body-sm": ["DM Sans"],
+                    "display-xl": ["Playfair Display"],
+                    "headline-sm": ["Playfair Display"],
+                    "display-lg": ["Playfair Display"],
+                    "display-lg-mobile": ["Playfair Display"],
+                    "headline-md": ["Playfair Display"],
+                    "label-mono": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-mono": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+<header class="bg-background/80 dark:bg-background/80 backdrop-blur-md sticky top-0 z-50 border-b border-outline-variant/10 shadow-xl shadow-background/40">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-[1200px] mx-auto w-full">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="flight_takeoff">flight_takeoff</span>
+<span class="font-display-lg text-display-lg-mobile text-primary tracking-tight">Traveloop</span>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Explore</a>
+<a class="font-body-md text-primary font-bold hover:text-primary transition-colors duration-300" href="#">Trips</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Saved</a>
+</nav>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border border-outline-variant/20 overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A sophisticated close-up portrait of a well-dressed traveler against a blurred architectural background. The lighting is soft and natural, emphasizing textures of high-quality fabrics. The overall mood is worldly and refined, fitting a premium concierge aesthetic with warm, muted tones and deep contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpxQoGb2jK6PZqRPZEHLQIE_tR2y-Iq-qnBok_ofYFE4PR3HUKbxbprnMNwZEoaChfQrKHkpU16m1Ts96ENS1wYiIogt2qAq2L4_9Jp2jFMeydPHA8kFKiBd0GE8Tt8aR2nayzWHIHEnjxTjqZcXMtoxrUMPr9MVbrhzIBvYfLDkroNnJpi6M8KRLUE_Ngs1kuJBEq0Wh5UlNYxM4FreIaaBfFpwqFI--F9BMqzY4--JOJU2OpW7d4wagbCvqTncjrEG4jt1ZdSJc"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop pt-lg pb-xl">
+<div class="mb-lg flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-2">My Journeys</h1>
+<p class="font-body-lg text-on-surface-variant max-w-xl">Manage your upcoming adventures and revisit your global footprints.</p>
+</div>
+<div class="flex gap-2 p-1 bg-surface-container rounded-xl">
+<button class="px-6 py-2 bg-primary-container text-on-primary rounded-lg font-body-sm transition-all active:scale-95">All Trips</button>
+<button class="px-6 py-2 text-on-surface-variant hover:text-primary rounded-lg font-body-sm transition-all">Archive</button>
+</div>
+</div>
+<section class="mb-xl">
+<div class="flex items-center gap-4 mb-gutter">
+<span class="w-3 h-3 rounded-full bg-primary-container shadow-[0_0_12px_rgba(255,107,74,0.6)]"></span>
+<h2 class="font-label-mono text-label-mono tracking-widest text-primary-container uppercase">Ongoing</h2>
+</div>
+<div class="group relative bg-surface-container rounded-xl overflow-hidden border-l-4 border-primary-container shadow-2xl transition-all hover:-translate-y-1">
+<div class="flex flex-col md:flex-row">
+<div class="w-full md:w-1/3 h-64 md:h-auto overflow-hidden">
+<img alt="Amalfi Coast" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A breathtaking view of the Amalfi Coast at sunset, with colorful houses clinging to steep cliffs overlooking the shimmering turquoise Mediterranean Sea. The sky is a warm palette of coral and soft gold, creating a romantic and high-end travel journalism aesthetic with cinematic depth and clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6TSuBY6wflgoZT9qUJzsY9iNx1KRxQJKp4M7MzzqosifhECCkY7_UIoXT3qFPZ8pTIglB6FqikhDWV9jwQjYTUq26F6Waf0ENG-INx9vy8tb0__lQ21fIRPsXH7fYqrqqXMZVUbpaV7ly-qPBJVjtfw4ZlxWDWb82bjh5TuPjJKH0Q0E_Aqr9XttoKAYpdeave2O28Gvag7WeP3acVfgEpoaB6pUnf80E_rHQ0TyL85GHGIuL2eqq--GAV6g51kzIdqvV9lQAljk"/>
+</div>
+<div class="w-full md:w-2/3 p-md flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-base">
+<div>
+<h3 class="font-headline-md text-on-surface">Amalfi Coastal Escape</h3>
+<p class="font-body-md text-on-surface-variant">Positano &amp; Ravello, Italy</p>
+</div>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+</div>
+</div>
+<div class="flex gap-gutter mt-sm">
+<div class="flex flex-col">
+<span class="font-label-mono text-[10px] text-outline uppercase tracking-tighter">Duration</span>
+<span class="font-body-md text-on-surface">Aug 12 — Aug 24</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-mono text-[10px] text-outline uppercase tracking-tighter">Companions</span>
+<span class="font-body-md text-on-surface">2 Travelers</span>
+</div>
+</div>
+</div>
+<div class="mt-lg flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface-container overflow-hidden bg-primary">
+<img data-alt="Close up face of travel companion" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAviwkkvKamPDZfbZIqamG7B0vhPWXGH-0qx8Vb5he048lx5nBApR8Jg4nHrLPq-qV5ifu2c2bSnMWCXDi3IDbtB5plqmKVmVBd3Fga_Ml-2s2j-S8V3K4U18BhpTdWBMIz6KaFCx639zeQZgOCZdRBQOnciFvmLLlSHi1lwy7R1M2pYF09EvVE5H4UA6foCHk7xpljmGBfGA7z9yrdGXaTwlXGQJUTKaFiDtF0n0KQEzmR8veM7DamcJ58bRlanhR0lC44rnqb2gE"/>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface-container overflow-hidden bg-secondary">
+<img data-alt="Close up face of travel companion" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0zsascKAeKSsXc4WcjkY-aij-rQmWgdt7ys2CCueg1Ebb-he8ScAPfUcQDs9MBQ7RoAt3mjQkcv2IctScYdWmStl-jRNe0QjamArTtBSyWrK6okO3bdo69SnUivEigUjdvn2AGftRx22TQs_KlXqRekS3tqA3BHIeOeVICIJYGr7RqpfX4TNl8yN9SH6wEQ-7U5fRDLXOdb-mzu8hdwNV3dDgj4nFiqOIjwp_6V82xiPgi2eqUG0dj1zE_r9vTuyRXQ4oBEM6SPI"/>
+</div>
+</div>
+<button class="px-8 py-3 bg-primary-container text-on-primary font-body-md rounded-lg shadow-lg hover:shadow-primary-container/20 transition-all active:scale-95">View Itinerary</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="mb-xl">
+<div class="flex items-center gap-4 mb-gutter">
+<span class="w-3 h-3 rounded-full bg-tertiary-container shadow-[0_0_12px_rgba(231,196,70,0.4)]"></span>
+<h2 class="font-label-mono text-label-mono tracking-widest text-tertiary-container uppercase">Upcoming</h2>
+</div>
+<div class="grid grid-cols-1 gap-md">
+<div class="group bg-surface-container rounded-xl overflow-hidden border-l-4 border-tertiary-container hover:bg-surface-container-high transition-colors">
+<div class="flex flex-col md:flex-row">
+<div class="w-full md:w-48 h-48 md:h-auto overflow-hidden">
+<img alt="Kyoto Temple" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A serene landscape of a traditional Japanese pagoda in Kyoto surrounded by vibrant autumn maple leaves in shades of deep red and orange. The atmosphere is peaceful and misty, captured with high-end photography techniques that emphasize the architectural detail and the rich, warm color palette of the midnight editorial style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdLS1NszBFPI1uwriHvQY2gwIRdvQZ4CMMsOW4VyLjJANyr7sWKpX4QRpyGCzsqnsZTXufu2A58goyR6SDVodFc15GM1HHjwd9a2IWkdQdrJj8rF3ggvjtrq2XIJ9t654MlCEKjX_b_w9QKwxv7EuRLkCQGqwQtz483wKYqcgtY0H15QubROTtHpsIOKaQdOFAwz23goE7YReeHq-QRo7lUl4L8bWt9xEmSeHue4_cUTevgijfMCjUFDwbSFgAgZvcCiTByogixB4"/>
+</div>
+<div class="flex-1 p-md flex flex-col justify-center">
+<div class="flex justify-between items-center">
+<div>
+<h3 class="font-headline-sm text-on-surface">Autumn in Kyoto</h3>
+<p class="font-body-sm text-on-surface-variant">Japan · Oct 15 — Oct 22</p>
+</div>
+<button class="p-3 rounded-full border border-outline-variant/30 text-on-surface-variant hover:border-tertiary-container hover:text-tertiary-container transition-all">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="mb-xl opacity-60">
+<div class="flex items-center gap-4 mb-gutter">
+<span class="w-3 h-3 rounded-full bg-secondary shadow-[0_0_12px_rgba(151,211,179,0.3)]"></span>
+<h2 class="font-label-mono text-label-mono tracking-widest text-secondary uppercase">Completed</h2>
+</div>
+<div class="grid grid-cols-1 gap-md">
+<div class="group bg-surface-container rounded-xl overflow-hidden border-l-4 border-secondary hover:opacity-100 transition-opacity">
+<div class="flex flex-col md:flex-row">
+<div class="w-full md:w-48 h-48 md:h-auto overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
+<img alt="Taj Mahal" class="w-full h-full object-cover" data-alt="The majestic Taj Mahal at sunrise, reflected in a perfectly still pool of water. The marble structure glows with soft pink and white light, surrounded by manicured gardens. The image uses a cinematic wide angle, emphasizing the symmetry and historical grandeur in a luxury travel magazine style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCENPk8KddxIwsr9AaPdY_--UALO6MaTnOOJjiLoIKyfVT5xAAWr82B_V89zVGWNybTmw6lGkMJvzWE2xw0z0mZDxt4eztzSKnMaeV78DmcEvfzztu42vauz_mDoUntxWGzf5914nXxn8hvxgqEbj7_Q2eXtJhmHm7q48tljEyqAgTPVgy2QJTgmjItAzPbKM0XzQCWpKag105Nh86IiwSx62oc_LrdySo1QXOTatZ-P1w85sn0udbH3Wpvbwcz0uFJOReP4AdXves"/>
+</div>
+<div class="flex-1 p-md flex flex-col justify-center">
+<div class="flex justify-between items-center">
+<div>
+<h3 class="font-headline-sm text-on-surface">The Golden Triangle</h3>
+<p class="font-body-sm text-on-surface-variant">Agra, India · Feb 2024</p>
+</div>
+<span class="material-symbols-outlined text-secondary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-xl flex flex-col items-center text-center">
+<div class="relative mb-lg">
+<div class="w-48 h-48 bg-surface-container-highest rounded-full flex items-center justify-center border border-outline-variant/20 shadow-inner">
+<span class="material-symbols-outlined text-7xl text-primary opacity-20" data-icon="public">public</span>
+</div>
+<div class="absolute inset-0 flex items-center justify-center">
+<svg class="w-64 h-64 text-primary-container/10" viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<path d="M37.5,-65.4C48.1,-59.1,55.9,-48.1,62.8,-36.4C69.7,-24.8,75.7,-12.4,76.5,0.4C77.3,13.3,72.8,26.5,65.3,37.8C57.7,49.1,47,58.4,34.8,65.4C22.6,72.4,8.8,77,-4.8,76.1C-18.4,75.2,-31.8,68.7,-43.3,59.9C-54.8,51.1,-64.5,39.9,-71.2,27C-77.9,14.1,-81.7,-0.5,-78.9,-14C-76.1,-27.5,-66.6,-40,-54.6,-46.8C-42.6,-53.6,-28,-54.7,-15.3,-58.5C-2.5,-62.4,8.4,-69,19.3,-71C30.2,-73,41.1,-70.5,37.5,-65.4Z" fill="currentColor" transform="translate(100 100)"></path>
+</svg>
+</div>
+</div>
+<h3 class="font-headline-md text-on-surface mb-2">No future plans?</h3>
+<p class="font-body-md text-on-surface-variant max-w-sm mb-lg">Your next global story is waiting to be written. Start exploring destinations today.</p>
+<button class="px-10 py-4 bg-primary-container text-on-primary font-display-sm rounded-full shadow-2xl hover:scale-105 transition-transform">
+                Book a New Adventure
+            </button>
+</section>
+</main>
+<footer class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-4 pb-2 bg-surface-container/90 dark:bg-surface-container/90 backdrop-blur-lg border-t border-outline-variant/10 shadow-[0_-8px_32px_rgba(0,0,0,0.4)] md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 hover:text-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-body-sm text-body-sm tracking-wide">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/10 rounded-full px-4 py-1 scale-110 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="map" style="font-variation-settings: 'FILL' 1;">map</span>
+<span class="font-body-sm text-body-sm tracking-wide">Trips</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 hover:text-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-body-sm text-body-sm tracking-wide">Saved</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 hover:text-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-body-sm text-body-sm tracking-wide">Profile</span>
+</a>
+</footer>
+</body></html>

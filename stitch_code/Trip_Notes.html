@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Traveloop | Trip Journal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=DM+Sans:wght@400;500;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    body {
+      background-color: #1d100e;
+      background-image: radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.03) 1px, transparent 0);
+      background-size: 32px 32px;
+    }
+    .glass-card {
+      background: rgba(42, 28, 25, 0.6);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .coral-glow {
+      position: fixed;
+      top: -10%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 107, 74, 0.1) 0%, rgba(255, 107, 74, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .sage-connector {
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, #97d3b3 20%, #97d3b3 80%, transparent);
+    }
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "primary": "#ffb4a3",
+                  "on-surface": "#f6ddd8",
+                  "inverse-surface": "#f6ddd8",
+                  "primary-fixed": "#ffdad2",
+                  "inverse-primary": "#ae3115",
+                  "tertiary-fixed-dim": "#e7c446",
+                  "on-secondary": "#003824",
+                  "surface-bright": "#453632",
+                  "on-error-container": "#ffdad6",
+                  "on-secondary-container": "#86c2a2",
+                  "secondary": "#97d3b3",
+                  "outline": "#a88a83",
+                  "surface-container-low": "#261815",
+                  "on-primary": "#630f00",
+                  "surface-variant": "#41312e",
+                  "surface-container-lowest": "#170b09",
+                  "surface-container-highest": "#41312e",
+                  "surface-container-high": "#352723",
+                  "error-container": "#93000a",
+                  "tertiary": "#e7c446",
+                  "on-background": "#f6ddd8",
+                  "primary-container": "#ff6b4a",
+                  "outline-variant": "#59413c",
+                  "on-tertiary-container": "#4d3e00",
+                  "on-primary-fixed": "#3d0600",
+                  "on-tertiary": "#3b2f00",
+                  "on-primary-fixed-variant": "#8c1900",
+                  "surface-tint": "#ffb4a3",
+                  "on-error": "#690005",
+                  "background": "#1d100e",
+                  "on-surface-variant": "#e1bfb8",
+                  "on-secondary-fixed-variant": "#135138",
+                  "secondary-fixed": "#b3f0ce",
+                  "secondary-fixed-dim": "#97d3b3",
+                  "error": "#ffb4ab",
+                  "surface": "#1d100e",
+                  "surface-container": "#2a1c19",
+                  "tertiary-container": "#c9a82b",
+                  "surface-dim": "#1d100e",
+                  "on-tertiary-fixed": "#231b00",
+                  "secondary-container": "#135138",
+                  "inverse-on-surface": "#3c2d29",
+                  "primary-fixed-dim": "#ffb4a3",
+                  "tertiary-fixed": "#ffe07c",
+                  "on-secondary-fixed": "#002113",
+                  "on-tertiary-fixed-variant": "#564500",
+                  "on-primary-container": "#661000"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "md": "24px",
+                  "sm": "12px",
+                  "gutter": "24px",
+                  "xl": "80px",
+                  "base": "8px",
+                  "margin-desktop": "64px",
+                  "margin-mobile": "20px",
+                  "lg": "48px",
+                  "xs": "4px"
+          },
+          "fontFamily": {
+                  "body-lg": ["DM Sans"],
+                  "body-md": ["DM Sans"],
+                  "body-sm": ["DM Sans"],
+                  "display-xl": ["Playfair Display"],
+                  "headline-sm": ["Playfair Display"],
+                  "display-lg": ["Playfair Display"],
+                  "display-lg-mobile": ["Playfair Display"],
+                  "headline-md": ["Playfair Display"],
+                  "label-mono": ["JetBrains Mono"]
+          },
+          "fontSize": {
+                  "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                  "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                  "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                  "display-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                  "display-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                  "display-lg-mobile": ["36px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                  "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                  "label-mono": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-on-surface selection:bg-primary-container selection:text-white">
+<div class="coral-glow"></div>
+<!-- TopAppBar -->
+<header class="bg-background/80 dark:bg-background/80 backdrop-blur-md docked full-width top-0 sticky bg-background/80 backdrop-blur-md border-b border-outline-variant/10 shadow-xl shadow-background/40 z-50">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-[1200px] mx-auto w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">flight_takeoff</span>
+<h1 class="font-display-lg text-display-lg-mobile text-primary dark:text-primary tracking-tight">Traveloop</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body-md" href="#">Explore</a>
+<a class="text-primary font-bold transition-colors duration-300 font-body-md" href="#">Trips</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body-md" href="#">Saved</a>
+</nav>
+<div class="w-10 h-10 rounded-full border border-primary/20 overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional close-up portrait of a worldly traveler with a warm expression, captured in soft, cinematic lighting against a blurred Parisian cafe background. The image has a high-end editorial feel with rich contrast and deep shadows, maintaining the sophisticated midnight aesthetic of the Traveloop brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNDi6BOSSC84OVXGqLsk2VWXkmaHcm5fflSeWL3Ak7gg7UTPRE6GM-amE9SXlLGNCiMznI13W5s6_UgCklsKscRRzgQJP-14NX56611bj1gqBhiQRuhvP-col64LbDX6F7LuVNCk5km6cgliGEGvyqbWg0HqPg3T5bAzfN6ypEVr-et4k30MvB-jolt_7dRpjUgjpj0hdBEB2vcDijwl9-iU3hocvjLblPv7IDDvRvLnqDCBajQ5a7DX45wt6P9Dt_yMMjcMo_bJg"/>
+</div>
+</div>
+</div>
+</header>
+<main class="relative max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop pt-lg pb-xl z-10">
+<!-- Page Header & Trip Selector -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-lg gap-6">
+<div class="space-y-2">
+<div class="flex items-center gap-2 text-secondary font-label-mono uppercase tracking-widest">
+<span class="material-symbols-outlined text-[16px]">auto_stories</span>
+<span>Travel Journal</span>
+</div>
+<div class="flex items-center gap-3 group cursor-pointer">
+<h2 class="font-display-xl text-display-lg-mobile md:text-display-lg">Autumn in Kyoto</h2>
+<span class="material-symbols-outlined text-primary group-hover:translate-y-1 transition-transform">expand_more</span>
+</div>
+<p class="text-on-surface-variant font-body-lg max-w-xl">A collection of whispers, flavors, and moments captured across the Gion district and beyond.</p>
+</div>
+<button class="flex items-center gap-2 bg-primary-container text-on-primary-container px-6 py-3 rounded-full font-bold shadow-lg shadow-primary-container/20 hover:scale-[1.02] active:scale-95 transition-all w-fit">
+<span class="material-symbols-outlined">add</span>
+<span>Add Note</span>
+</button>
+</div>
+<!-- Toolbar & Tabs -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-md border-b border-outline-variant/10 pb-4">
+<div class="flex p-1 bg-surface-container rounded-full w-full md:w-auto">
+<button class="flex-1 md:flex-none px-6 py-2 rounded-full bg-surface-variant text-primary font-bold text-body-sm transition-all">All</button>
+<button class="flex-1 md:flex-none px-6 py-2 rounded-full text-on-surface-variant hover:text-on-surface font-medium text-body-sm transition-all">By Day</button>
+<button class="flex-1 md:flex-none px-6 py-2 rounded-full text-on-surface-variant hover:text-on-surface font-medium text-body-sm transition-all">By Stop</button>
+</div>
+<div class="flex items-center gap-3 w-full md:w-auto overflow-x-auto no-scrollbar">
+<span class="text-on-surface-variant text-body-sm font-medium whitespace-nowrap">Filter by:</span>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-secondary-container/30 text-secondary border border-secondary/20 rounded-full text-xs font-medium cursor-pointer">Temple</span>
+<span class="px-3 py-1 bg-secondary-container/30 text-secondary border border-secondary/20 rounded-full text-xs font-medium cursor-pointer">Cuisine</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant border border-outline-variant/30 rounded-full text-xs font-medium cursor-pointer">Photography</span>
+</div>
+</div>
+</div>
+<!-- Notes List -->
+<div class="relative grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Animated Sage Connector Line (Desktop Only) -->
+<div class="hidden md:block absolute left-4 top-0 bottom-0 sage-connector opacity-30"></div>
+<div class="md:col-start-2 md:col-span-10 space-y-6">
+<!-- Featured Note -->
+<article class="group relative glass-card p-6 md:p-8 rounded-xl border-l-4 border-l-tertiary shadow-2xl hover:translate-y-[-4px] transition-all duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="space-y-1">
+<span class="font-label-mono text-tertiary uppercase tracking-widest text-xs">Featured Moment • Day 03</span>
+<h3 class="font-headline-md text-on-surface group-hover:text-primary transition-colors">The Zen of Ryoan-ji</h3>
+</div>
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-variant rounded-full text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">attach_file</span>
+</button>
+<button class="p-2 hover:bg-error-container/20 rounded-full text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-lg mb-6 leading-relaxed">
+            Arrived at 7:00 AM before the crowds. The fifteen rocks are arranged so that only fourteen are visible at any given time. There is a profound silence here that feels ancient. I spent forty minutes just watching the shadows shift across the raked gravel... <span class="text-primary cursor-pointer hover:underline">Read more</span>
+</p>
+<div class="flex flex-wrap gap-2">
+<div class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-high rounded-lg text-xs font-medium border border-outline-variant/30">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span>Ryoan-ji Temple</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-high rounded-lg text-xs font-medium border border-outline-variant/30">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>Early Morning</span>
+</div>
+</div>
+</article>
+<!-- Standard Note -->
+<article class="group relative glass-card p-6 md:p-8 rounded-xl shadow-xl hover:translate-y-[-4px] transition-all duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="space-y-1">
+<span class="font-label-mono text-on-surface-variant uppercase tracking-widest text-xs">Journal Entry • Day 02</span>
+<h3 class="font-headline-md text-on-surface group-hover:text-primary transition-colors">Gion's Hidden Tea House</h3>
+</div>
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-variant rounded-full text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">attach_file</span>
+</button>
+<button class="p-2 hover:bg-error-container/20 rounded-full text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-lg mb-6 leading-relaxed">
+            Found a small doorway marked only by a weathered indigo curtain. The matcha was whisked into a thick emerald froth. The wagashi sweet resembled a fallen maple leaf, echoing the scenery outside. Spoke briefly with the host about the history of the ceramic bowls... <span class="text-primary cursor-pointer hover:underline">Read more</span>
+</p>
+<div class="flex flex-wrap gap-2">
+<div class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-high rounded-lg text-xs font-medium border border-outline-variant/30">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span>Gion District</span>
+</div>
+</div>
+</article>
+<!-- Note with Image -->
+<article class="group relative glass-card p-0 overflow-hidden rounded-xl shadow-xl hover:translate-y-[-4px] transition-all duration-300">
+<div class="grid grid-cols-1 lg:grid-cols-3">
+<div class="h-48 lg:h-full relative">
+<img alt="Kyoto Street" class="w-full h-full object-cover" data-alt="A stunning sunset view of a narrow, lantern-lit street in Kyoto's Higashiyama district. Traditional wooden machiya houses line the path as the sky glows with deep oranges and purples, reflecting the Traveloop coral accent. The atmosphere is quiet and ethereal, capturing a perfect moment of travel solitude." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMxxGnBPTICdWlGlvFJ-82PoJnsfneKKht1aT5xkBKHqu4Il5v3krw0BW2hX1AcjXKcktpR7pGNHL3UwpA3Ta0WjJf6JtNTqG7z51cZo2OXslUI5dSGKqAELIoODyWHX1umcfp1o89YOgpKIs14sGtQxVIeSOTnKce6bhgSW54Zul3mna4FTF0EhJV3KIferwfF7CMIohvnvG-4SXPNTN5pBzE_NHA-GDXaHM-mgMFi1c3UTtgT-FSV_eKDeF5Q76Hkf2Hzyb5T_g"/>
+<div class="absolute inset-0 bg-gradient-to-r from-background/40 to-transparent"></div>
+</div>
+<div class="lg:col-span-2 p-6 md:p-8">
+<div class="flex justify-between items-start mb-4">
+<div class="space-y-1">
+<span class="font-label-mono text-on-surface-variant uppercase tracking-widest text-xs">Photo Log • Day 04</span>
+<h3 class="font-headline-md text-on-surface group-hover:text-primary transition-colors">Golden Hour at Kiyomizu-dera</h3>
+</div>
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-variant rounded-full text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">attach_file</span>
+</button>
+<button class="p-2 hover:bg-error-container/20 rounded-full text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-lg mb-6 leading-relaxed">
+                The entire valley turned a burning orange. The wooden terrace of the temple seemed to float above the sea of maple trees. Captured the light hitting the Pagoda from the west path. Simply breathtaking... <span class="text-primary cursor-pointer hover:underline">Read more</span>
+</p>
+<div class="flex flex-wrap gap-2">
+<div class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-high rounded-lg text-xs font-medium border border-outline-variant/30">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span>Kiyomizu-dera</span>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<!-- FAB Quick Add -->
+<button class="fixed bottom-24 right-6 md:bottom-10 md:right-10 w-14 h-14 bg-primary-container text-on-primary-container rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-40">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 600;">edit_note</span>
+</button>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-4 pb-2 bg-surface-container/90 backdrop-blur-lg border-t border-outline-variant/10 shadow-[0_-8px_32px_rgba(0,0,0,0.4)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-body-sm text-body-sm tracking-wide">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/10 rounded-full px-4 py-1 active:scale-110 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">map</span>
+<span class="font-body-sm text-body-sm tracking-wide">Trips</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="font-body-sm text-body-sm tracking-wide">Saved</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-body-sm text-body-sm tracking-wide">Profile</span>
+</a>
+</nav>
+</body></html>
