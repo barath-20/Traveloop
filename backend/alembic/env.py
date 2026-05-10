@@ -13,6 +13,8 @@ import app.models.section
 import app.models.activity
 import app.models.expense
 import app.models.destination
+import app.models.checklist
+import app.models.note
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
