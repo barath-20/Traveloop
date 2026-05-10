@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Playfair+Display:wght@600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.grain-texture {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBf7Mlhq9MSvMfLj9dDCacD4GM_OOg2BLUacHognMohfe8OYCQZeCiWZMSuQnxdP2DWAMJk0KMtploUHJnv4d4CtT2xi5fHyGMb6E1A82U9UwX8jVmYfknpYmssxk1P6Kk7vEsGqfUDhZtQOIN4xVaSFuKneQVNqCA2AFxcuMmgwCKI5UKKIN9BUAy0cr1nJTJrJM5vHByAoXbhyRE-kjkzmOwp4HZNshmuSI1AARlmb_8gF_DBNDlanQUurLS9Jw_zK6zX54n8BW4);
+    opacity: 0.03;
+    pointer-events: none
+    }
+.glass-sheet {
+    backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1)
+    }
+.sage-connector {
+    background: linear-gradient(to bottom, transparent, #97d3b3 50%, transparent)
+    }
+.coral-gradient {
+    background: linear-gradient(90deg, #ff6b4a 0%, #ffb4a3 100%)
+    }</style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#ffb4a3",
+                    "on-surface": "#f6ddd8",
+                    "inverse-surface": "#f6ddd8",
+                    "primary-fixed": "#ffdad2",
+                    "inverse-primary": "#ae3115",
+                    "tertiary-fixed-dim": "#e7c446",
+                    "on-secondary": "#003824",
+                    "surface-bright": "#453632",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-container": "#86c2a2",
+                    "secondary": "#97d3b3",
+                    "outline": "#a88a83",
+                    "surface-container-low": "#261815",
+                    "on-primary": "#630f00",
+                    "surface-variant": "#41312e",
+                    "surface-container-lowest": "#170b09",
+                    "surface-container-highest": "#41312e",
+                    "surface-container-high": "#352723",
+                    "error-container": "#93000a",
+                    "tertiary": "#e7c446",
+                    "on-background": "#f6ddd8",
+                    "primary-container": "#ff6b4a",
+                    "outline-variant": "#59413c",
+                    "on-tertiary-container": "#4d3e00",
+                    "on-primary-fixed": "#3d0600",
+                    "on-tertiary": "#3b2f00",
+                    "on-primary-fixed-variant": "#8c1900",
+                    "surface-tint": "#ffb4a3",
+                    "on-error": "#690005",
+                    "background": "#1d100e",
+                    "on-surface-variant": "#e1bfb8",
+                    "on-secondary-fixed-variant": "#135138",
+                    "secondary-fixed": "#b3f0ce",
+                    "secondary-fixed-dim": "#97d3b3",
+                    "error": "#ffb4ab",
+                    "surface": "#1d100e",
+                    "surface-container": "#2a1c19",
+                    "tertiary-container": "#c9a82b",
+                    "surface-dim": "#1d100e",
+                    "on-tertiary-fixed": "#231b00",
+                    "secondary-fixed-dim": "#97d3b3",
+                    "inverse-on-surface": "#3c2d29",
+                    "primary-fixed-dim": "#ffb4a3",
+                    "tertiary-fixed": "#ffe07c",
+                    "on-secondary-fixed": "#002113",
+                    "on-tertiary-fixed-variant": "#564500",
+                    "on-primary-container": "#661000"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "24px",
+                    "sm": "12px",
+                    "gutter": "24px",
+                    "xl": "80px",
+                    "base": "8px",
+                    "margin-desktop": "64px",
+                    "margin-mobile": "20px",
+                    "lg": "48px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "body-lg": ["DM Sans"],
+                    "body-md": ["DM Sans"],
+                    "body-sm": ["DM Sans"],
+                    "display-xl": ["Playfair Display"],
+                    "headline-sm": ["Playfair Display"],
+                    "display-lg": ["Playfair Display"],
+                    "display-lg-mobile": ["Playfair Display"],
+                    "headline-md": ["Playfair Display"],
+                    "label-mono": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-mono": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container min-h-screen pb-32">
+<div class="fixed inset-0 grain-texture z-0"></div>
+<!-- TopAppBar -->
+<header class="bg-background/80 dark:bg-background/80 backdrop-blur-md border-b border-outline-variant/10 shadow-xl shadow-background/40 docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-[1200px] mx-auto w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="flight_takeoff">flight_takeoff</span>
+<h1 class="font-display-lg text-display-lg-mobile text-primary dark:text-primary tracking-tight">Traveloop</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden">
+<img alt="User Profile" data-alt="A sophisticated close-up portrait of a globetrotter in a modern travel setting, illuminated by the warm coral and navy tones of a luxury airport lounge. The lighting is soft and cinematic, highlighting natural features against a background of blurred architectural lines. The aesthetic is clean and premium, consistent with a high-end editorial travel brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyn8MPLYSvNNQ9hsx-STE8_2XLkDgLu9za-hFpdOtdb1t1EeFUMwDuTNE0RNw-wYyYfQVpg9NFGRsK_GognFyO9qaWAwQgK1EeClvHjU4pgq5YG-y9go5XIHiRApCxG3o2y_pp3sjjUm5SrBAtp5RMmA9IlDTesSrlpa0eiOrv6sbIMD03MmMZVyQV2Cp_SiHAs8phxZFnk3C9favQk3XjpKfs9XRbLuD8e6rnMtNunDArFGrvn-rkkz66ee95RI1bPa7V5lM7xUs"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Toolbar & Trip Selector -->
+<nav class="sticky top-[72px] z-40 bg-surface/60 backdrop-blur-md border-b border-outline-variant/5">
+<div class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="relative group min-w-[240px]">
+<button class="w-full flex items-center justify-between bg-surface-container text-on-surface-variant px-4 py-3 rounded-xl border border-outline-variant/20 hover:border-primary-container transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="map">map</span>
+<span class="font-medium">Amalfi Coast, Italy</span>
+</div>
+<span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+<div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+<span class="bg-secondary/10 text-secondary border border-secondary/20 px-4 py-1.5 rounded-full text-body-sm font-medium whitespace-nowrap">Essential</span>
+<span class="bg-surface-container text-on-surface-variant px-4 py-1.5 rounded-full text-body-sm whitespace-nowrap hover:bg-surface-container-high transition-colors cursor-pointer">Summer Wear</span>
+<span class="bg-surface-container text-on-surface-variant px-4 py-1.5 rounded-full text-body-sm whitespace-nowrap hover:bg-surface-container-high transition-colors cursor-pointer">Tech Gear</span>
+<span class="bg-surface-container text-on-surface-variant px-4 py-1.5 rounded-full text-body-sm whitespace-nowrap hover:bg-surface-container-high transition-colors cursor-pointer">Medication</span>
+</div>
+</div>
+</nav>
+<main class="relative z-10 max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop mt-8">
+<!-- Progress Section -->
+<section class="glass-sheet rounded-2xl p-6 md:p-8 mb-8 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary-container/5 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2"></div>
+<div class="flex justify-between items-end mb-4">
+<div>
+<h2 class="font-headline-md text-on-surface mb-1">Packing Progress</h2>
+<p class="text-on-surface-variant text-body-sm">You're almost ready for your coastal escape.</p>
+</div>
+<div class="text-right">
+<span class="font-label-mono text-primary text-headline-sm">68%</span>
+</div>
+</div>
+<div class="h-3 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full coral-gradient rounded-full transition-all duration-1000" style="width: 68%;"></div>
+</div>
+</section>
+<!-- Category Grid (Asymmetric Layout) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Documents (Wide Card) -->
+<div class="md:col-span-7">
+<div class="bg-surface-container rounded-2xl p-6 border border-outline-variant/10 shadow-lg hover:shadow-2xl transition-all group">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl" data-icon="description">description</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-on-surface">Travel Documents</h3>
+<p class="text-on-surface-variant text-body-sm">Essential papers &amp; ID</p>
+</div>
+</div>
+<span class="font-label-mono text-secondary px-3 py-1 bg-secondary/10 rounded-lg">3/4</span>
+</div>
+<ul class="space-y-4">
+<li class="flex items-center justify-between p-4 rounded-xl bg-surface-container-high/50 border border-transparent hover:border-outline-variant transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-full border-2 border-primary-container bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-background text-sm font-bold" data-icon="check">check</span>
+</div>
+<span class="text-on-surface opacity-60 line-through">Passport &amp; Visa</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-40" data-icon="drag_handle">drag_handle</span>
+</li>
+<li class="flex items-center justify-between p-4 rounded-xl bg-surface-container-high/50 border border-transparent hover:border-outline-variant transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-full border-2 border-primary-container bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-background text-sm font-bold" data-icon="check">check</span>
+</div>
+<span class="text-on-surface opacity-60 line-through">Hotel Reservation PDF</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-40" data-icon="drag_handle">drag_handle</span>
+</li>
+<li class="flex items-center justify-between p-4 rounded-xl bg-surface-container-high/50 border border-transparent hover:border-outline-variant transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-full border-2 border-primary-container bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-background text-sm font-bold" data-icon="check">check</span>
+</div>
+<span class="text-on-surface opacity-60 line-through">Travel Insurance</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-40" data-icon="drag_handle">drag_handle</span>
+</li>
+<li class="flex items-center justify-between p-4 rounded-xl bg-surface-container-high border border-primary-container/20 hover:border-primary-container transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-full border-2 border-outline transition-colors"></div>
+<span class="text-on-surface">International Driving Permit</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="drag_handle">drag_handle</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Clothing (Sidebar Style Card) -->
+<div class="md:col-span-5 flex flex-col gap-8">
+<div class="bg-surface-container rounded-2xl p-6 border border-outline-variant/10 shadow-lg hover:shadow-2xl transition-all">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-2xl" data-icon="checkroom">checkroom</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-on-surface">Clothing</h3>
+<p class="text-on-surface-variant text-body-sm">Style for the shore</p>
+</div>
+</div>
+<span class="font-label-mono text-secondary px-3 py-1 bg-secondary/10 rounded-lg">8/12</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-4 p-3 hover:bg-surface-container-high rounded-xl transition-colors">
+<div class="w-6 h-6 rounded-full border-2 border-primary-container bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-background text-sm font-bold" data-icon="check">check</span>
+</div>
+<span class="text-on-surface-variant text-body-sm">Linen Shirts (4)</span>
+</div>
+<div class="flex items-center gap-4 p-3 hover:bg-surface-container-high rounded-xl transition-colors">
+<div class="w-6 h-6 rounded-full border-2 border-outline"></div>
+<span class="text-on-surface text-body-sm">Swim Trunk (2)</span>
+</div>
+<div class="flex items-center gap-4 p-3 hover:bg-surface-container-high rounded-xl transition-colors">
+<div class="w-6 h-6 rounded-full border-2 border-outline"></div>
+<span class="text-on-surface text-body-sm">Evening Blazer</span>
+</div>
+<button class="w-full text-center py-2 text-primary text-body-sm font-medium hover:underline">View 9 more items...</button>
+</div>
+</div>
+<!-- Weather Card (Extra Context) -->
+<div class="glass-sheet rounded-2xl p-6 relative overflow-hidden group border-none">
+<div class="absolute inset-0 sage-connector opacity-10 -rotate-45 scale-150"></div>
+<div class="relative z-10 flex items-center justify-between">
+<div>
+<span class="font-label-mono text-secondary mb-1 block uppercase tracking-widest text-[10px]">Forecast</span>
+<h4 class="font-headline-sm text-on-surface">24°C Sunny</h4>
+<p class="text-on-surface-variant text-body-sm">Perfect for your light linen pack.</p>
+</div>
+<span class="material-symbols-outlined text-tertiary text-4xl" data-icon="sunny">sunny</span>
+</div>
+</div>
+</div>
+<!-- Tech (Bento Style Small) -->
+<div class="md:col-span-4">
+<div class="bg-surface-container rounded-2xl p-6 border border-outline-variant/10 h-full">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="devices">devices</span>
+<span class="font-label-mono text-secondary">2/5</span>
+</div>
+<h3 class="font-headline-sm text-on-surface mb-4">Tech Gear</h3>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded-full border-2 border-primary-container bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-background text-[12px] font-bold" data-icon="check">check</span>
+</div>
+<span class="text-on-surface-variant text-body-sm line-through">Camera Body</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded-full border-2 border-outline"></div>
+<span class="text-on-surface text-body-sm">Universal Adapter</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Toiletries (Bento Style Small) -->
+<div class="md:col-span-4">
+<div class="bg-surface-container rounded-2xl p-6 border border-outline-variant/10 h-full">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="sanitizer">sanitizer</span>
+<span class="font-label-mono text-secondary">5/6</span>
+</div>
+<h3 class="font-headline-sm text-on-surface mb-4">Toiletries</h3>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded-full border-2 border-primary-container bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-background text-[12px] font-bold" data-icon="check">check</span>
+</div>
+<span class="text-on-surface-variant text-body-sm line-through">Sunscreen SPF 50</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded-full border-2 border-outline"></div>
+<span class="text-on-surface text-body-sm">Personal Meds</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Tip Card -->
+<div class="md:col-span-4">
+<div class="bg-primary-container/10 border border-primary-container/20 rounded-2xl p-6 h-full flex flex-col justify-center relative overflow-hidden">
+<span class="material-symbols-outlined text-primary-container mb-2" data-icon="lightbulb">lightbulb</span>
+<p class="text-on-surface text-body-md font-medium">Pro-tip: Roll your clothes to save 30% more space in your carry-on.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Action Row -->
+<div class="fixed bottom-24 left-1/2 -translate-x-1/2 w-[calc(100%-40px)] max-w-[600px] z-50">
+<div class="glass-sheet rounded-2xl p-3 flex items-center justify-between gap-3 shadow-2xl">
+<button class="flex-1 bg-primary-container text-on-primary-container font-medium py-3 rounded-xl flex items-center justify-center gap-2 hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                Add Item
+            </button>
+<button class="w-14 h-14 rounded-xl border border-outline-variant/30 text-on-surface-variant flex items-center justify-center hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="restart_alt">restart_alt</span>
+</button>
+<button class="w-14 h-14 rounded-xl border border-outline-variant/30 text-on-surface-variant flex items-center justify-center hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-4 pb-2 bg-surface-container/90 dark:bg-surface-container/90 backdrop-blur-lg border-t border-outline-variant/10 shadow-[0_-8px_32px_rgba(0,0,0,0.4)] md:hidden">
+<div class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-body-sm text-body-sm tracking-wide">Explore</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary bg-primary-container/10 rounded-full px-4 py-1 scale-110 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="map" data-weight="fill" style="font-variation-settings: 'FILL' 1;">map</span>
+<span class="font-body-sm text-body-sm tracking-wide">Trips</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-body-sm text-body-sm tracking-wide">Saved</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-body-sm text-body-sm tracking-wide">Profile</span>
+</div>
+</nav>
+</body></html>

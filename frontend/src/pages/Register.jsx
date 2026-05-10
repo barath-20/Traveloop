@@ -9,7 +9,7 @@ export default function Register() {
         email: '',
         phone: '',
         location: '',
-        password: 'password123' // Mock password as it's not in the UI yet
+        password: ''
     });
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +20,16 @@ export default function Register() {
         setIsLoading(true);
 
         try {
-            const response = await api.auth.register(formData);
+            const [first_name, ...last_name_parts] = formData.full_name.trim().split(/\s+/);
+            const payload = {
+                first_name: first_name,
+                last_name: last_name_parts.join(' ') || '.', // Backend requires last_name
+                email: formData.email,
+                password: formData.password,
+                phone: formData.phone,
+                city: formData.location
+            };
+            const response = await api.auth.register(payload);
             localStorage.setItem('traveloop_token', response.token);
             localStorage.setItem('traveloop_user', JSON.stringify(response.user));
             navigate('/');
@@ -150,6 +159,26 @@ export default function Register() {
                                     htmlFor="location"
                                 >
                                     Current City
+                                </label>
+                            </div>
+
+                            {/* Password */}
+                            <div className="relative group">
+                                <input 
+                                    className="peer w-full bg-surface-container/50 border-none rounded-lg px-4 pt-6 pb-2 text-on-surface focus:ring-1 focus:ring-tertiary transition-all outline-none" 
+                                    id="password" 
+                                    placeholder=" " 
+                                    type="password"
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                    minLength={8}
+                                    required
+                                />
+                                <label 
+                                    className="absolute left-4 top-4 text-on-surface-variant font-body-sm transition-all pointer-events-none peer-focus:text-tertiary peer-focus:-translate-y-3 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-3 peer-[:not(:placeholder-shown)]:scale-90" 
+                                    htmlFor="password"
+                                >
+                                    Password
                                 </label>
                             </div>
                         </div>

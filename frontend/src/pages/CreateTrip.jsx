@@ -78,9 +78,9 @@ export default function CreateTrip() {
                 </div>
 
                 {/* Main Form Bento Grid */}
-                <section className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-gutter mb-xl">
+                <section className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-xl">
                     {/* Trip Details Card */}
-                    <div className="md:col-span-8 bg-surface-container p-8 rounded-xl shadow-2xl border border-outline-variant/10">
+                    <div className="lg:col-span-8 bg-surface-container p-6 md:p-8 rounded-xl shadow-2xl border border-outline-variant/10">
                         <div className="space-y-8">
                             {/* Trip Name */}
                             <div className="relative group">
@@ -115,12 +115,11 @@ export default function CreateTrip() {
                                 </div>
                                 {/* Date Range */}
                                 <div className="relative">
-                                    <label className="block font-label-mono text-tertiary uppercase tracking-widest text-[10px] mb-2">Timeline</label>
-                                    <div className="flex items-center gap-2">
-                                        <div className="relative flex-1">
-                                            <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary">calendar_month</span>
+                                    <label className="block font-label-mono text-tertiary uppercase tracking-widest text-[10px] mb-2 px-1">Timeline</label>
+                                    <div className="flex flex-col sm:flex-row items-center gap-3">
+                                        <div className="relative w-full">
                                             <input 
-                                                className="w-full bg-background border-outline-variant/30 rounded-lg p-4 pl-12 text-on-surface focus:ring-2 focus:ring-primary outline-none transition-all font-body-md" 
+                                                className="w-full bg-background border-outline-variant/30 rounded-lg p-4 text-on-surface focus:ring-2 focus:ring-primary outline-none transition-all font-body-md appearance-none" 
                                                 placeholder="Start" 
                                                 type="date"
                                                 id="start_date"
@@ -129,11 +128,10 @@ export default function CreateTrip() {
                                                 required
                                             />
                                         </div>
-                                        <span className="text-outline-variant">→</span>
-                                        <div className="relative flex-1">
-                                            <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary">event</span>
+                                        <span className="text-outline-variant hidden sm:block">→</span>
+                                        <div className="relative w-full">
                                             <input 
-                                                className="w-full bg-background border-outline-variant/30 rounded-lg p-4 pl-12 text-on-surface focus:ring-2 focus:ring-primary outline-none transition-all font-body-md" 
+                                                className="w-full bg-background border-outline-variant/30 rounded-lg p-4 text-on-surface focus:ring-2 focus:ring-primary outline-none transition-all font-body-md appearance-none" 
                                                 placeholder="End" 
                                                 type="date"
                                                 id="end_date"
@@ -149,7 +147,7 @@ export default function CreateTrip() {
                     </div>
 
                     {/* Map Preview/Helper */}
-                    <div className="md:col-span-4 bg-surface-container-high rounded-xl overflow-hidden relative min-h-[300px] border border-outline-variant/10 group">
+                    <div className="lg:col-span-4 bg-surface-container-high rounded-xl overflow-hidden relative min-h-[300px] border border-outline-variant/10 group">
                         <div 
                             className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-60" 
                             style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDiHcMJoTqqHb9W0Mk-aBtt6DH_y7j6CN3eejkTncti1Or7IgMpRWYH6C8JpUVszt-cS_qznb00fAUjetE_jb15MiXJmWKzP-cubTg1jf2xHUyY0AHJefahLED44fJSEVXE255_8-JBDozDgs-E5TBvd9QK_-gecGWwS9POrBxKg5obuNggjaMkY_VIJuxcUzw9q-59hLwloCKI41qUv5Yj9s2SvDZDHsvzdNPrmZvo63k_0u_JbARjdhQTXZ7YVSp7g5m1bYno3RE')" }}

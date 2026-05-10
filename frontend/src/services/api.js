@@ -20,7 +20,18 @@ export const api = {
 
         if (!response.ok) {
             const error = await response.json().catch(() => ({ detail: 'An error occurred' }));
-            throw new Error(error.detail || 'Request failed');
+            let message = 'Request failed';
+            
+            if (typeof error.detail === 'string') {
+                message = error.detail;
+            } else if (Array.isArray(error.detail)) {
+                // Handle FastAPI validation errors
+                message = error.detail.map(err => `${err.loc.join('.')}: ${err.msg}`).join(', ');
+            } else if (error.detail) {
+                message = JSON.stringify(error.detail);
+            }
+            
+            throw new Error(message);
         }
 
         return response.json();

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #1d100e;
+            background-image: radial-gradient(circle at 50% 0%, rgba(255, 107, 74, 0.05) 0%, transparent 50%),
+                              url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3ExternalIcon%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-blend-mode: overlay;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-sheet {
+            backdrop-filter: blur(16px);
+            background-color: rgba(42, 28, 25, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .sage-connector {
+            background: linear-gradient(180deg, transparent, #97d3b3 50%, transparent);
+            width: 2px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#ffb4a3",
+                        "on-surface": "#f6ddd8",
+                        "inverse-surface": "#f6ddd8",
+                        "primary-fixed": "#ffdad2",
+                        "inverse-primary": "#ae3115",
+                        "tertiary-fixed-dim": "#e7c446",
+                        "on-secondary": "#003824",
+                        "surface-bright": "#453632",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-container": "#86c2a2",
+                        "secondary": "#97d3b3",
+                        "outline": "#a88a83",
+                        "surface-container-low": "#261815",
+                        "on-primary": "#630f00",
+                        "surface-variant": "#41312e",
+                        "surface-container-lowest": "#170b09",
+                        "surface-container-highest": "#41312e",
+                        "surface-container-high": "#352723",
+                        "error-container": "#93000a",
+                        "tertiary": "#e7c446",
+                        "on-background": "#f6ddd8",
+                        "primary-container": "#ff6b4a",
+                        "outline-variant": "#59413c",
+                        "on-tertiary-container": "#4d3e00",
+                        "on-primary-fixed": "#3d0600",
+                        "on-tertiary": "#3b2f00",
+                        "on-primary-fixed-variant": "#8c1900",
+                        "surface-tint": "#ffb4a3",
+                        "on-error": "#690005",
+                        "background": "#1d100e",
+                        "on-surface-variant": "#e1bfb8",
+                        "on-secondary-fixed-variant": "#135138",
+                        "secondary-fixed": "#b3f0ce",
+                        "secondary-fixed-dim": "#97d3b3",
+                        "error": "#ffb4ab",
+                        "surface": "#1d100e",
+                        "surface-container": "#2a1c19",
+                        "tertiary-container": "#c9a82b",
+                        "surface-dim": "#1d100e",
+                        "on-tertiary-fixed": "#231b00",
+                        "secondary-fixed-dim": "#97d3b3",
+                        "inverse-on-surface": "#3c2d29",
+                        "primary-fixed-dim": "#ffb4a3",
+                        "tertiary-fixed": "#ffe07c",
+                        "on-secondary-fixed": "#002113",
+                        "on-tertiary-fixed-variant": "#564500",
+                        "on-primary-container": "#661000",
+                        "lavender-chip": "#d1c4e9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "sm": "12px",
+                        "gutter": "24px",
+                        "xl": "80px",
+                        "base": "8px",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "20px",
+                        "lg": "48px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["DM Sans"],
+                        "body-md": ["DM Sans"],
+                        "body-sm": ["DM Sans"],
+                        "display-xl": ["Playfair Display"],
+                        "headline-sm": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "label-mono": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "display-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "label-mono": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface antialiased min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-background/80 dark:bg-background/80 backdrop-blur-md sticky top-0 z-50 border-b border-outline-variant/10 shadow-xl shadow-background/40">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-[1200px] mx-auto w-full">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-display-lg" data-icon="flight_takeoff">flight_takeoff</span>
+<h1 class="font-display-lg text-display-lg-mobile tracking-tight">Traveloop</h1>
+</div>
+<div class="hidden md:flex gap-8 items-center">
+<nav class="flex gap-6">
+<a class="text-primary font-bold font-body-md transition-colors duration-300" href="#">Explore</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body-md" href="#">Trips</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body-md" href="#">Saved</a>
+</nav>
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-outline/20">
+<img class="w-full h-full object-cover" data-alt="A close-up studio portrait of a sophisticated global traveler with a warm, welcoming expression. The lighting is soft and cinematic with high contrast, reflecting a luxury editorial style. The background is a muted dark slate that complements the deep navy and coral brand identity. The individual has a polished yet adventurous look, fitting for a premium travel concierge service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBO9eoD7Ozp3y4sdpVxfweROXUZatFF2fd1mefeIQAfZXRFtJEMuF6_uXRTLqCvr88TzArP0UCwAIiZvFimwISGYL6fRrSfkKixyQmRFRKlZL9X_jix4KnXMeWBFhWxezOO6IT7ydWMsBVqvepPHUe0QJOPBhYda69Bk4kVQtq1XPooOBrAsz_Ztshsg4vLaYo1KZtYyJtbXbUCjfKBwiuerk-Q9pbc-7fNxaoPvs0-SXpEqHH8d2Vc7K11mKiz06mCiJu0Tnc-W_s"/>
+</div>
+</div>
+<div class="md:hidden">
+<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+</div>
+</div>
+</header>
+<!-- Toolbar Row -->
+<section class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop mt-8 space-y-6">
+<!-- Full-width Search Input -->
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</div>
+<input class="w-full bg-surface-container-high border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/60 focus:ring-2 focus:ring-primary-container/30 transition-all font-body-md" placeholder="Search activities, hidden gems, or city tours..." type="text"/>
+</div>
+<!-- Filter/Sort/Group Pills -->
+<div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+<button class="flex items-center gap-2 bg-[#d1c4e9]/20 text-[#d1c4e9] border border-[#d1c4e9]/30 px-4 py-2 rounded-full font-body-sm whitespace-nowrap hover:bg-[#d1c4e9]/30 transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="filter_list">filter_list</span>
+                Filter
+            </button>
+<button class="flex items-center gap-2 bg-[#d1c4e9]/20 text-[#d1c4e9] border border-[#d1c4e9]/30 px-4 py-2 rounded-full font-body-sm whitespace-nowrap hover:bg-[#d1c4e9]/30 transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="sort">sort</span>
+                Sort by Price
+            </button>
+<button class="flex items-center gap-2 bg-[#d1c4e9]/20 text-[#d1c4e9] border border-[#d1c4e9]/30 px-4 py-2 rounded-full font-body-sm whitespace-nowrap hover:bg-[#d1c4e9]/30 transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="layers">layers</span>
+                Group by Type
+            </button>
+</div>
+<!-- Category Chips -->
+<div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide border-b border-outline-variant/10">
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-body-sm whitespace-nowrap">All</button>
+<button class="bg-surface-container-high text-on-surface-variant hover:text-on-surface px-6 py-2 rounded-full font-body-sm whitespace-nowrap transition-colors">Adventure</button>
+<button class="bg-surface-container-high text-on-surface-variant hover:text-on-surface px-6 py-2 rounded-full font-body-sm whitespace-nowrap transition-colors">Culture</button>
+<button class="bg-surface-container-high text-on-surface-variant hover:text-on-surface px-6 py-2 rounded-full font-body-sm whitespace-nowrap transition-colors">Gastronomy</button>
+<button class="bg-surface-container-high text-on-surface-variant hover:text-on-surface px-6 py-2 rounded-full font-body-sm whitespace-nowrap transition-colors">Relaxation</button>
+<button class="bg-surface-container-high text-on-surface-variant hover:text-on-surface px-6 py-2 rounded-full font-body-sm whitespace-nowrap transition-colors">Photography</button>
+</div>
+</section>
+<!-- Main Content: Activity Results -->
+<main class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<article class="group bg-surface-container-high rounded-2xl overflow-hidden hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-background/20">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A majestic hot air balloon floating over a rugged desert landscape at dawn. The sky is a gradient of deep indigo and soft coral pink. The lighting is ethereal and soft, emphasizing the vastness of the horizon. This captures a sense of luxury adventure and editorial travel photography, with high clarity and balanced composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnG8dgdzN4ZEI2iA4z93eSNb2YTYrV6K7PSP7zT8zjHk2kONaF27dEUR-Hg4Vjv3_P_n-4lTCt8zgF1zLKSe7Y6cCycx83S05hRLqbJ5OUZY0FJ93PhNM6jEDgRG47M6IF8MWznkEhhQl4zCkwNf0Yxb48FKwogpiMCdVKZzmWrwSz7B17wv6uV44LaHNiIi0ynjkLrmQzYFLUIfEqkqOQrdgxJUwQ9aWq5RbonT92-IhwFIqpMRENVPEoGyEKtYRkEKb6MwtJb7s"/>
+<div class="absolute top-4 left-4">
+<span class="bg-[#d1c4e9]/90 text-[#311b92] px-3 py-1 rounded-full text-body-sm font-medium backdrop-blur-md">Adventure</span>
+</div>
+</div>
+<div class="p-6 space-y-4">
+<div class="flex justify-between items-start gap-4">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Cappadocia Dawn Flight</h3>
+<span class="font-label-mono text-primary-container text-lg">$280</span>
+</div>
+<div class="flex items-center gap-4 pt-2">
+<button class="flex-1 bg-primary-container text-on-primary-container py-3 rounded-xl font-body-md font-bold flex items-center justify-center gap-2 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                            Add to Itinerary
+                        </button>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="group bg-surface-container-high rounded-2xl overflow-hidden hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-background/20">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="An intimate, high-end fine dining setting in a historic Parisian cellar. Warm candlelight reflects off crystal glassware and polished silver. The atmosphere is sophisticated, moody, and exclusive. The color palette features deep ambers, rich burgundies, and dark slate tones, evoking a sense of worldly culinary excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXQXSyujpq31ePWbJTy_UoLRZIP_tur_4C8eE0iU5qCONsmy1exJObksix91uRu0tJhxGRF1rSLiLpWDMCZlQLbmHea8xOQ9WeT60H0CRWJqr98_kp0XwXuPHPSQzsJYB13hdUzMPtmlf4nQWYKmaM1Oek44LUhkMVeir8x5pdB5pw28OGMsBRm2YX7xE6MN06FC4nXtBEP5bGP_Z44xvG3SlJw0YJxsrwJa5FZTIueyDn2V5v6M3vFsICaWLKNQIHGJzMGDScf2A"/>
+<div class="absolute top-4 left-4">
+<span class="bg-[#d1c4e9]/90 text-[#311b92] px-3 py-1 rounded-full text-body-sm font-medium backdrop-blur-md">Gastronomy</span>
+</div>
+</div>
+<div class="p-6 space-y-4">
+<div class="flex justify-between items-start gap-4">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Chef's Table in Paris</h3>
+<span class="font-label-mono text-primary-container text-lg">$145</span>
+</div>
+<div class="flex items-center gap-4 pt-2">
+<button class="flex-1 bg-primary-container text-on-primary-container py-3 rounded-xl font-body-md font-bold flex items-center justify-center gap-2 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                            Add to Itinerary
+                        </button>
+</div>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="group bg-surface-container-high rounded-2xl overflow-hidden hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-background/20">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A serene Balinese water temple surrounded by lush, vibrant tropical greenery and still reflecting pools. The lighting is golden hour, creating long shadows and a spiritual, tranquil atmosphere. The scene is clean, minimalist, and perfectly composed, utilizing the brand's sage green and coral undertones in the natural environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCP2v36iidFBhNeKzeXORQ812k2g3qIRb7ZqtBJU8CGMj8moM6w8UmSE5Vu4t42Xc8Ogp3IY30c5AaS3MKTG06Z3_otiBVf1vhQRSk2d8ysHB2j4dJojALq-nLSuPTy4nhPcQx3ouU2ZI11dcCuh85ephNwgLuC3ljrc34MscxFEQ9-uW1q5AaEComW8-K_Yp0CK6rzfwRj0hpMwg1uoReY2K3weLlMDKeOlYOpZhLNqQWG8DKFFGliZCVef8Ta095Qee2PgbOAFYg"/>
+<div class="absolute top-4 left-4">
+<span class="bg-[#d1c4e9]/90 text-[#311b92] px-3 py-1 rounded-full text-body-sm font-medium backdrop-blur-md">Culture</span>
+</div>
+</div>
+<div class="p-6 space-y-4">
+<div class="flex justify-between items-start gap-4">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Ubud Spiritual Journey</h3>
+<span class="font-label-mono text-primary-container text-lg">$65</span>
+</div>
+<div class="flex items-center gap-4 pt-2">
+<button class="flex-1 bg-primary-container text-on-primary-container py-3 rounded-xl font-body-md font-bold flex items-center justify-center gap-2 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                            Add to Itinerary
+                        </button>
+</div>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="group bg-surface-container-high rounded-2xl overflow-hidden hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-background/20 lg:col-span-2">
+<div class="relative h-64 md:h-80 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A breathtaking aerial view of the Eiffel Tower and the Parisian skyline at twilight. The city lights begin to twinkle as the sky turns a deep indigo. The composition is expansive and cinematic, suggesting an exclusive, high-end travel experience. The overall mood is romantic, worldly, and anticipatory." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEyy3GjnkmV32eYmzR0Qaryjjna9gagRK1NM475tKn2lRmNJe6ngL3r4v7o_CjnWFirHMBD-OqJBc3UKgp9_io_q_zvRmVyz-WsjtHb1zKKUfniApLylTUadrV8MitP21U4gDhtyW0pLSzAQGv4ib5skBePbYjvao8E788dwuCEq41Ib0BdOKb1ONt0R08bOIgswlkq6gPXjPAi-Xdxkkev16Zpr1Lek1GFUaH690rKGh8aksqzWXlDAfElgoBtGydrcltCd3ZikQ"/>
+<div class="absolute top-6 left-6">
+<span class="bg-[#d1c4e9]/90 text-[#311b92] px-4 py-1.5 rounded-full text-body-md font-medium backdrop-blur-md">Featured Experience</span>
+</div>
+</div>
+<div class="p-8 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="space-y-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Private Louvre Night Tour</h3>
+<p class="text-on-surface-variant font-body-md max-w-md">Experience the world's most famous museum in complete solitude after hours with an expert curator.</p>
+</div>
+<div class="text-center md:text-right space-y-4 w-full md:w-auto">
+<div class="font-label-mono text-primary-container text-3xl font-bold">$1,200</div>
+<button class="w-full bg-primary text-on-primary px-8 py-3 rounded-xl font-body-md font-bold hover:shadow-[0_0_20px_rgba(255,179,163,0.4)] transition-all">
+                            Reserve Now
+                        </button>
+</div>
+</div>
+</article>
+<!-- Card 5 -->
+<article class="group bg-surface-container-high rounded-2xl overflow-hidden hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-background/20">
+<div class="relative h-64 md:h-80 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A classic red London double-decker bus crossing Westminster Bridge against a dramatic evening sky. The Houses of Parliament are silhouetted in the background. The style is crisp and editorial, with a focus on historical grandeur and modern city movement, fitting for a curated travel guide." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGeRe4V6_LIHKTc7cv-b9H6RBm7okhqAVjyK8DmNGRvjlarWb8ewlk_uw1ck0VGnwV45ZCfHis3zbDmOixs8ff9-ueaP-7MGYVOQHlYpnwDMWetwINTBb7_jY5VC_DpcHhshYHXTOpJAI5L4AUrk2tPb6DyQ1eviWiidQ2KBwlv5B_xoarJvAfR6eA5YbTJCenjhDUbMtyxNXgUh1EsxuW4L296trW8uMD5UGNLsiUoYiihXm15sEHerzQXw-G3VsqITLGsoOCu7w"/>
+<div class="absolute top-4 left-4">
+<span class="bg-[#d1c4e9]/90 text-[#311b92] px-3 py-1 rounded-full text-body-sm font-medium backdrop-blur-md">Culture</span>
+</div>
+</div>
+<div class="p-6 space-y-4">
+<div class="flex justify-between items-start gap-4">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">London History Walk</h3>
+<span class="font-label-mono text-primary-container text-lg">$45</span>
+</div>
+<div class="flex items-center gap-4 pt-2">
+<button class="flex-1 bg-primary-container text-on-primary-container py-3 rounded-xl font-body-md font-bold flex items-center justify-center gap-2 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                            Add to Itinerary
+                        </button>
+</div>
+</div>
+</article>
+</div>
+<!-- Scroll Hint -->
+<div class="flex flex-col items-center justify-center mt-16 space-y-4 opacity-50">
+<span class="font-body-sm text-on-surface-variant tracking-widest uppercase">Discover More</span>
+<div class="w-[1px] h-12 sage-connector"></div>
+<span class="material-symbols-outlined text-primary animate-bounce" data-icon="expand_more">expand_more</span>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-4 pb-2 bg-surface-container/90 dark:bg-surface-container/90 backdrop-blur-lg border-t border-outline-variant/10 shadow-[0_-8px_32px_rgba(0,0,0,0.4)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/10 rounded-full px-4 py-1 transition-all duration-200 scale-110" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-body-sm text-body-sm tracking-wide">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 hover:text-primary transition-colors duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-body-sm text-body-sm tracking-wide">Trips</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 hover:text-primary transition-colors duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-body-sm text-body-sm tracking-wide">Saved</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 hover:text-primary transition-colors duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-body-sm text-body-sm tracking-wide">Profile</span>
+</a>
+</nav>
+</body></html>
