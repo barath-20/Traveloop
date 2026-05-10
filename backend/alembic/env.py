@@ -12,8 +12,9 @@ import app.models.trip
 import app.models.section
 import app.models.activity
 import app.models.expense
-import app.models.destination
-import app.models.checklist
+from app.models.destination import Destination
+from app.models.user_destination import UserDestination
+from app.models.checklist import ChecklistItem
 import app.models.note
 
 # this is the Alembic Config object, which provides

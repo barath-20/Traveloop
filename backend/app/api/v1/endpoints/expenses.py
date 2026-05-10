@@ -100,6 +100,11 @@ def delete_expense(
     crud_expense.delete_expense(db, expense_id)
     return {"message": "Deleted"}
 
+from io import BytesIO
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import LETTER
+from reportlab.lib import colors
+
 @router.get("/{trip_id}/budget-summary", response_model=dict)
 def get_budget_summary(
     trip_id: UUID,
@@ -117,19 +122,37 @@ def get_budget_summary(
     total_budget = trip.total_budget or Decimal("0.00")
     remaining = total_budget - total_spent
     
+    # Check if overall trip is over budget
+    is_over_budget = total_spent > total_budget
+    
     breakdown_cat = {}
     breakdown_sec = {}
     for e in all_expenses:
         cat = e.category
-        sec = str(e.section_id) if e.section_id else "unassigned"
+        sec_id = str(e.section_id) if e.section_id else "unassigned"
         
         breakdown_cat[cat] = breakdown_cat.get(cat, Decimal("0.00")) + e.amount
-        breakdown_sec[sec] = breakdown_sec.get(sec, Decimal("0.00")) + e.amount
         
+        if sec_id not in breakdown_sec:
+            breakdown_sec[sec_id] = {"total": Decimal("0.00"), "over_budget": False}
+        breakdown_sec[sec_id]["total"] += e.amount
+        
+    # Check individual sections for budget alerts
+    # Note: Sections have their own budget in the model
+    from app.crud import crud_section
+    sections = crud_section.get_sections(db, trip_id)
+    for s in sections:
+        sid = str(s.id)
+        if sid in breakdown_sec:
+            s_budget = s.budget or Decimal("0.00")
+            if breakdown_sec[sid]["total"] > s_budget:
+                breakdown_sec[sid]["over_budget"] = True
+
     return {
         "total_budget": total_budget,
         "total_spent": total_spent,
         "remaining": remaining,
+        "is_over_budget": is_over_budget,
         "breakdown_by_category": breakdown_cat,
         "breakdown_by_section": breakdown_sec
     }
@@ -140,11 +163,66 @@ def download_invoice(
     db: Session = Depends(get_db),
     current_user: User = Depends(deps.get_current_user)
 ):
-    # This is a placeholder for PDF generation
     trip = crud_trip.get_trip(db, trip_id)
     if not trip or trip.user_id != current_user.id:
         raise HTTPException(status_code=403, detail="Not enough permissions")
+    
+    all_expenses = crud_expense.get_all_trip_expenses(db, trip_id)
+    total_spent = sum(e.amount for e in all_expenses)
+    
+    # Generate PDF in memory
+    buffer = BytesIO()
+    c = canvas.Canvas(buffer, pagesize=LETTER)
+    width, height = LETTER
+
+    # Header
+    c.setFont("Helvetica-Bold", 24)
+    c.drawString(50, height - 50, "Traveloop Trip Invoice")
+    
+    c.setFont("Helvetica", 12)
+    c.drawString(50, height - 80, f"Trip Name: {trip.title}")
+    c.drawString(50, height - 100, f"Owner: {current_user.full_name}")
+    c.drawString(50, height - 120, f"Dates: {trip.start_date} to {trip.end_date}")
+    
+    # Table Header
+    y = height - 160
+    c.setFont("Helvetica-Bold", 12)
+    c.drawString(50, y, "Category")
+    c.drawString(200, y, "Description")
+    c.drawString(450, y, "Amount")
+    c.line(50, y - 5, 550, y - 5)
+    
+    # Table Content
+    y -= 25
+    c.setFont("Helvetica", 10)
+    for expense in all_expenses:
+        if y < 50: # New page
+            c.showPage()
+            y = height - 50
+            c.setFont("Helvetica", 10)
+            
+        c.drawString(50, y, str(expense.category))
+        c.drawString(200, y, str(expense.description)[:40])
+        c.drawString(450, y, f"${expense.amount:,.2f}")
+        y -= 20
         
-    # Return a dummy binary file for now
-    pdf_content = b"%PDF-1.4\n1 0 obj\n<< /Title (Invoice placeholder) >>\nendobj\n"
-    return Response(content=pdf_content, media_type="application/pdf", headers={"Content-Disposition": f"attachment; filename=traveloop-invoice-{trip_id}.pdf"})
+    # Footer
+    y -= 20
+    c.line(50, y + 15, 550, y + 15)
+    c.setFont("Helvetica-Bold", 14)
+    c.drawString(350, y, "TOTAL SPENT:")
+    c.drawString(450, y, f"${total_spent:,.2f}")
+    
+    c.setFont("Helvetica-Oblique", 10)
+    c.drawString(50, 30, "Thank you for using Traveloop! Have a safe journey.")
+    
+    c.showPage()
+    c.save()
+    
+    buffer.seek(0)
+    return Response(
+        content=buffer.getvalue(), 
+        media_type="application/pdf", 
+        headers={"Content-Disposition": f"attachment; filename=traveloop-invoice-{trip.title.replace(' ', '_')}.pdf"}
+    )
+

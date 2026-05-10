@@ -69,6 +69,23 @@ def delete_checklist_item(
     crud_extra.delete_checklist_item(db, item_id)
     return {"message": "Deleted"}
 
+@router.post("/{trip_id}/checklist/reset")
+def reset_checklist(
+    trip_id: UUID,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(deps.get_current_user)
+):
+    trip = crud_trip.get_trip(db, trip_id)
+    if not trip or trip.user_id != current_user.id:
+        raise HTTPException(status_code=403, detail="Not enough permissions")
+    
+    items = crud_extra.get_checklist_items(db, trip_id)
+    for item in items:
+        item.is_packed = False
+    db.commit()
+    return {"message": "Checklist reset successfully"}
+
+
 # Note Endpoints
 @router.get("/{trip_id}/notes", response_model=List[TripNoteResponse])
 def get_notes(

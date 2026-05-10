@@ -24,18 +24,32 @@ def update_user_me(
 ):
     return crud_user.update_user(db, current_user, user_in)
 
-@router.post("/upload", response_model=dict)
-def mock_upload_file(
-    file: UploadFile = File(...),
+from app.schemas.user_destination import UserDestinationCreate, UserDestinationResponse
+from app.crud import crud_user_destination
+
+@router.get("/me/saved-destinations", response_model=List[UserDestinationResponse])
+def get_my_saved_destinations(
+    db: Session = Depends(get_db),
     current_user: User = Depends(deps.get_current_user)
 ):
-    # Mocking S3 upload
-    # In a real app, you'd upload to S3 and get back a URL
-    file_id = str(uuid.uuid4())
-    mock_url = f"https://traveloop-media.s3.amazonaws.com/{file_id}-{file.filename}"
-    
-    return {
-        "filename": file.filename,
-        "url": mock_url,
-        "content_type": file.content_type
-    }
+    return crud_user_destination.get_saved_destinations(db, current_user.id)
+
+@router.post("/me/saved-destinations", response_model=UserDestinationResponse)
+def save_destination(
+    obj_in: UserDestinationCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(deps.get_current_user)
+):
+    return crud_user_destination.create_saved_destination(db, obj_in, current_user.id)
+
+@router.delete("/me/saved-destinations/{saved_id}")
+def remove_saved_destination(
+    saved_id: uuid.UUID,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(deps.get_current_user)
+):
+    obj = crud_user_destination.delete_saved_destination(db, saved_id, current_user.id)
+    if not obj:
+        raise HTTPException(status_code=404, detail="Saved destination not found")
+    return {"message": "Removed from wishlist"}
+

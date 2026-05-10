@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.api.v1.endpoints import auth, trips, sections, activities, itinerary, expenses, destinations, search, extra, community, users
+from app.api.v1.endpoints import auth, trips, sections, activities, itinerary, expenses, destinations, search, extra, community, users, media
 
 api_router = APIRouter()
 api_router.include_router(auth.router, prefix="/auth", tags=["auth"])
@@ -14,3 +14,4 @@ api_router.include_router(destinations.router, prefix="/destinations", tags=["de
 api_router.include_router(search.router, prefix="/search", tags=["search"])
 api_router.include_router(extra.router, prefix="/trips", tags=["checklist_notes"])
 api_router.include_router(community.router, prefix="/community", tags=["community_admin"])
+api_router.include_router(media.router, prefix="/media", tags=["media"])
