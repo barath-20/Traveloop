@@ -1,0 +1,1261 @@
+TRAVELOOP
+Product Requirements Document
+v1.0  ·  Hackathon Build  ·  Backend + Frontend Coordination
+Personalized Travel Planning Made Easy
+1. Product Overview
+Traveloop is a full-stack, multi-platform travel planning application. Users can build multi-city itineraries, manage budgets, discover destinations and activities, collaborate with friends, and share plans publicly. This PRD is the single source of truth for both backend and frontend teams.
+1.1 Vision
+An end-to-end, personalized, intelligent, and collaborative platform that makes travel planning as exciting as the trip itself.
+1.2 Key Goals
+Allow users to create structured, day-wise itineraries across multiple cities
+Auto-estimate budgets per trip segment and surface cost breakdowns
+Enable activity and city discovery through search
+Support community sharing and trip cloning
+Provide admin analytics for platform monitoring
+1.3 Platforms
+Web (desktop-first, responsive to mobile)
+Mobile-friendly layout required for all screens
+1.4 Tech Assumptions
+Backend: REST API (Node/Django/Laravel or equivalent)
+Database: Relational (PostgreSQL recommended)
+Auth: JWT-based sessions
+File Storage: S3-compatible for profile photos / cover images
+Frontend: Any SPA framework (React preferred based on wireframes)
+2. User Roles & Permissions
+Role
+Description
+Key Permissions
+Guest
+Unauthenticated visitor
+View public/shared itineraries only
+Registered User
+Logged-in traveller
+Full CRUD on own trips, profile, notes, checklist, budget
+Admin
+Platform operator
+Access analytics dashboard, manage users, moderate content
+3. Screen Inventory & Feature Breakdown
+The following 14 screens were identified from the wireframes and PRD. Each is broken down by purpose, UI components, and data needs.
+  S1 — Login Screen   [Public]  
+Purpose: Authenticate returning users.
+UI Components:
+Email input
+Password input
+Login button
+Forgot password link
+Sign up link
+Key Endpoints:
+POST /auth/login
+POST /auth/forgot-password
+Notes:
+Redirect to Dashboard on success. Show inline validation errors.
+  S2 — Registration Screen   [Public]  
+Purpose: Create a new user account.
+UI Components:
+First/Last name
+Email
+Phone
+City
+Country
+Additional info textarea
+Profile photo upload
+Register button
+Key Endpoints:
+POST /auth/register
+POST /media/upload (avatar)
+Notes:
+Email uniqueness validation server-side. Phone optional. After register → auto-login → Dashboard.
+  S3 — Main Landing / Dashboard   [Auth]  
+Purpose: Central hub showing trip overview and inspiration.
+UI Components:
+Banner image carousel
+Search bar
+Group/Filter/Sort controls
+Top Regional Selections (cards)
+Previous Trips (cards)
+Plan a Trip CTA
+Key Endpoints:
+GET /trips?status=ongoing,upcoming,completed
+GET /destinations/popular
+Notes:
+Show empty state for new users with prominent 'Plan a Trip' CTA.
+  S4 — Create a New Trip   [Auth]  
+Purpose: Initiate a new trip with basic metadata.
+UI Components:
+Trip name input
+Select a place (autocomplete)
+Start date picker
+End date picker
+Suggested places/activities grid
+Save / Next button
+Key Endpoints:
+POST /trips
+GET /destinations/suggestions?query=
+Notes:
+Suggested places grid is AI or curated. Cover photo optional at this stage.
+  S5 — Build Itinerary Screen   [Auth]  
+Purpose: Add sections (stops/days) with date ranges and budgets to the trip.
+UI Components:
+Section cards (expandable)
+Section name
+Date range per section
+Budget per section
+Add another Section button
+Key Endpoints:
+POST /trips/:id/sections
+PUT /trips/:id/sections/:sId
+DELETE /trips/:id/sections/:sId
+Notes:
+Sections map to stops/cities. Budget field is manual input, validated against trip total budget later.
+  S6 — User Trip Listing   [Auth]  
+Purpose: Show all trips categorised by status.
+UI Components:
+Search bar
+Group by / Filter / Sort controls
+Ongoing / Upcoming / Completed trip cards
+Short overview per card
+Key Endpoints:
+GET /trips (with status filter)
+DELETE /trips/:id
+Notes:
+Status derived from start/end dates vs today. Cards link to Itinerary View.
+  S7 — User Profile   [Auth]  
+Purpose: View and edit user details, see pre-planned and previous trips.
+UI Components:
+Profile photo
+Editable user info
+Pre-planned trips grid (View buttons)
+Previous trips grid (View buttons)
+Key Endpoints:
+GET /users/me
+PUT /users/me
+GET /trips?userId=me&status=upcoming
+GET /trips?userId=me&status=completed
+Notes:
+Allow profile photo re-upload. Language preference dropdown stored in user settings.
+  S8 — Activity / City Search   [Auth]  
+Purpose: Search and browse cities or activities to add to a trip.
+UI Components:
+Search bar with autocomplete
+Group/Filter/Sort controls
+Result list (option + details)
+Add to Trip button per result
+Key Endpoints:
+GET /search?q=&type=city|activity
+POST /trips/:id/activities
+Notes:
+Results should show name, category, estimated cost, duration. Pagination required.
+  S9 — Itinerary View with Budget   [Auth]  
+Purpose: Read the full day-wise itinerary with expense column.
+UI Components:
+Trip title header
+Search/Filter/Sort
+Day grouping (Day 1, Day 2…)
+Physical Activity column
+Expense column
+Timeline connector
+Key Endpoints:
+GET /trips/:id/itinerary
+GET /trips/:id/budget-summary
+Notes:
+View mode toggle: list vs calendar. Activity blocks editable inline.
+  S10 — Community Tab   [Auth]  
+Purpose: Browse publicly shared itineraries from all users.
+UI Components:
+Search bar
+Group/Filter/Sort
+Community post cards (avatar, summary)
+Right-panel description/notes
+Key Endpoints:
+GET /community/itineraries
+POST /community/itineraries/:id/clone
+Notes:
+Posts are public versions of trips. Users opt-in to share. Clone creates a copy under current user.
+  S11 — Packing Checklist   [Auth]  
+Purpose: Per-trip checklist for packing items.
+UI Components:
+Search/Filter/Sort
+Category groupings (Accessories, Hygiene, etc.)
+Checkbox per item
+Add item input
+Print all / Share Checklist buttons
+Key Endpoints:
+GET /trips/:id/checklist
+POST /trips/:id/checklist
+PUT /trips/:id/checklist/:itemId
+DELETE /trips/:id/checklist/:itemId
+Notes:
+Pre-seeded categories from system. User can add custom items. Mark as packed = checked state.
+  S12 — Admin Panel   [Admin]  
+Purpose: Monitor platform metrics, user activity, and manage content.
+UI Components:
+User stats table
+Trip stats table
+Popular activities chart
+Pie/bar charts
+User management actions
+Key Endpoints:
+GET /admin/stats
+GET /admin/users
+GET /admin/trips
+DELETE /admin/users/:id
+Notes:
+Admin-only route guard. Charts: trips created over time, top cities, active users.
+  S13 — Trip Notes / Journal   [Auth]  
+Purpose: Add free-text notes tied to a trip or specific stop.
+UI Components:
+Add note button
+Note cards with timestamp
+Filter by Trip/Day/Stop toggles
+Edit / Delete per note
+Key Endpoints:
+GET /trips/:id/notes
+POST /trips/:id/notes
+PUT /trips/:id/notes/:nId
+DELETE /trips/:id/notes/:nId
+Notes:
+Notes sortable by date. Tie note to a section/day optionally.
+  S14 — Expense Invoice / Billing Screen   [Auth]  
+Purpose: Full financial summary with invoice-style view and budget gauge.
+UI Components:
+Trip summary header (logo, dates, traveller info)
+Budget gauge (total/used/remaining)
+Expense line-item table (category, desc, nights, unit cost, amount)
+Subtotals + Grand Total
+Download Invoice / Export PDF / Mark as Paid buttons
+Key Endpoints:
+GET /trips/:id/expenses
+POST /trips/:id/expenses
+PUT /trips/:id/expenses/:eId
+GET /trips/:id/invoice (PDF export)
+Notes:
+PDF export endpoint returns a binary. Mark as paid is a status field on the expense record.
+4. Database Schema (Relational)
+All tables use UUID primary keys. created_at / updated_at timestamps on all tables.
+4.1 users
+Column
+Type
+Constraints
+Notes
+id
+UUID
+PK
+first_name
+VARCHAR(100)
+NOT NULL
+last_name
+VARCHAR(100)
+NOT NULL
+email
+VARCHAR(255)
+UNIQUE NOT NULL
+password_hash
+TEXT
+NOT NULL
+bcrypt
+phone
+VARCHAR(30)
+NULLABLE
+city
+VARCHAR(100)
+NULLABLE
+country
+VARCHAR(100)
+NULLABLE
+avatar_url
+TEXT
+NULLABLE
+S3 URL
+bio
+TEXT
+NULLABLE
+additional info
+language_pref
+VARCHAR(10)
+DEFAULT 'en'
+role
+ENUM('user','admin')
+DEFAULT 'user'
+is_active
+BOOLEAN
+DEFAULT true
+soft delete
+4.2 trips
+Column
+Type
+Constraints
+Notes
+id
+UUID
+PK
+user_id
+UUID
+FK → users.id
+name
+VARCHAR(255)
+NOT NULL
+description
+TEXT
+NULLABLE
+cover_image_url
+TEXT
+NULLABLE
+start_date
+DATE
+NOT NULL
+end_date
+DATE
+NOT NULL
+total_budget
+DECIMAL(12,2)
+NULLABLE
+status
+ENUM
+COMPUTED or stored
+ongoing/upcoming/completed
+is_public
+BOOLEAN
+DEFAULT false
+community sharing
+cloned_from
+UUID
+NULLABLE FK → trips.id
+for cloned trips
+4.3 trip_sections (Stops / Days)
+Column
+Type
+Constraints
+Notes
+id
+UUID
+PK
+trip_id
+UUID
+FK → trips.id CASCADE
+title
+VARCHAR(255)
+NOT NULL
+e.g. 'Day 1 - Paris'
+description
+TEXT
+NULLABLE
+start_date
+DATE
+NOT NULL
+end_date
+DATE
+NOT NULL
+budget
+DECIMAL(12,2)
+NULLABLE
+order_index
+INTEGER
+NOT NULL
+for reordering
+4.4 activities
+Column
+Type
+Constraints
+Notes
+id
+UUID
+PK
+name
+VARCHAR(255)
+NOT NULL
+type
+VARCHAR(100)
+sightseeing/food/adventure/etc
+city
+VARCHAR(100)
+country
+VARCHAR(100)
+description
+TEXT
+estimated_cost
+DECIMAL(10,2)
+duration_hours
+DECIMAL(5,1)
+image_url
+TEXT
+is_system
+BOOLEAN
+DEFAULT true
+curated vs user-added
+4.5 trip_activities (junction)
+Column
+Type
+Constraints
+Notes
+id
+UUID
+PK
+trip_id
+UUID
+FK → trips.id
+section_id
+UUID
+FK → trip_sections.id NULLABLE
+activity_id
+UUID
+FK → activities.id
+scheduled_date
+DATE
+NULLABLE
+scheduled_time
+TIME
+NULLABLE
+actual_cost
+DECIMAL(10,2)
+NULLABLE
+overrides estimate
+notes
+TEXT
+NULLABLE
+4.6 expenses
+Column
+Type
+Constraints
+Notes
+id
+UUID
+PK
+trip_id
+UUID
+FK → trips.id
+section_id
+UUID
+NULLABLE FK
+category
+VARCHAR(100)
+hotel/flight/food/activity/other
+description
+TEXT
+quantity
+DECIMAL(8,2)
+DEFAULT 1
+nights, tickets, etc
+unit_cost
+DECIMAL(10,2)
+NOT NULL
+amount
+DECIMAL(12,2)
+GENERATED
+quantity * unit_cost
+is_paid
+BOOLEAN
+DEFAULT false
+payment_status
+VARCHAR(50)
+pending/paid/cancelled
+4.7 checklist_items
+Column
+Type
+Constraints
+Notes
+id
+UUID
+PK
+trip_id
+UUID
+FK → trips.id
+category
+VARCHAR(100)
+clothing/documents/electronics/other
+item_name
+VARCHAR(255)
+NOT NULL
+is_packed
+BOOLEAN
+DEFAULT false
+order_index
+INTEGER
+4.8 trip_notes
+Column
+Type
+Constraints
+Notes
+id
+UUID
+PK
+trip_id
+UUID
+FK → trips.id
+section_id
+UUID
+NULLABLE FK → trip_sections.id
+content
+TEXT
+NOT NULL
+created_at
+TIMESTAMP
+updated_at
+TIMESTAMP
+4.9 destinations (reference table)
+Column
+Type
+Constraints
+Notes
+id
+UUID
+PK
+name
+VARCHAR(255)
+NOT NULL
+country
+VARCHAR(100)
+region
+VARCHAR(100)
+cost_index
+DECIMAL(4,2)
+1-10 scale
+popularity_score
+DECIMAL(4,2)
+image_url
+TEXT
+description
+TEXT
+5. API Endpoint Reference
+Base URL: /api/v1   ·   All endpoints return JSON   ·   Auth endpoints require Bearer token in Authorization header
+5.1 Authentication
+POST  /auth/register
+Register a new user
+Field
+Value
+Auth Required
+No
+Request Body / Params
+{ first_name, last_name, email, password, phone?, city?, country?, bio? }
+Response
+{ user: UserObject, token: string }
+Notes
+Hash password before storage. Return 409 if email taken.
+POST  /auth/login
+Authenticate user and return JWT
+Field
+Value
+Auth Required
+No
+Request Body / Params
+{ email, password }
+Response
+{ user: UserObject, token: string }
+Notes
+Return 401 for invalid credentials.
+POST  /auth/forgot-password
+Trigger password reset email
+Field
+Value
+Auth Required
+No
+Request Body / Params
+{ email }
+Response
+{ message: 'Reset email sent' }
+Notes
+Always return 200 to prevent email enumeration.
+POST  /auth/reset-password
+Set new password using reset token
+Field
+Value
+Auth Required
+No
+Request Body / Params
+{ token, new_password }
+Response
+{ message: 'Password updated' }
+Notes
+Token expiry: 1 hour.
+POST  /auth/logout
+Invalidate session / token
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+—
+Response
+{ message: 'Logged out' }
+Notes
+If using stateless JWT, this is a client-side clear. If blocklist used, add token to blocklist.
+5.2 Users
+GET  /users/me
+Get current user profile
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+—
+Response
+{ user: UserObject }
+Notes
+PUT  /users/me
+Update current user profile
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+{ first_name?, last_name?, phone?, city?, country?, bio?, language_pref?, avatar_url? }
+Response
+{ user: UpdatedUserObject }
+Notes
+DELETE  /users/me
+Delete (deactivate) account
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+—
+Response
+{ message: 'Account deleted' }
+Notes
+Soft delete: set is_active=false.
+5.3 Trips
+GET  /trips
+List current user's trips
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+Query: status=[ongoing|upcoming|completed], page, limit, sort
+Response
+{ trips: TripObject[], total, page }
+Notes
+Status computed: upcoming=start>today, ongoing=start≤today≤end, completed=end<today.
+POST  /trips
+Create a new trip
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+{ name, description?, start_date, end_date, total_budget?, cover_image_url?, is_public? }
+Response
+{ trip: TripObject }
+Notes
+GET  /trips/:id
+Get single trip details
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+—
+Response
+{ trip: TripObject }
+Notes
+Return 403 if trip is private and not owned by user.
+PUT  /trips/:id
+Update trip metadata
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+Same fields as POST, all optional
+Response
+{ trip: UpdatedTripObject }
+Notes
+DELETE  /trips/:id
+Delete a trip
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+—
+Response
+{ message: 'Trip deleted' }
+Notes
+Cascade delete sections, activities, expenses, notes, checklist items.
+5.4 Trip Sections (Stops)
+GET  /trips/:id/sections
+List all sections for a trip
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+—
+Response
+{ sections: SectionObject[] }
+Notes
+Ordered by order_index.
+POST  /trips/:id/sections
+Add a new section to a trip
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+{ title, description?, start_date, end_date, budget?, order_index? }
+Response
+{ section: SectionObject }
+Notes
+PUT  /trips/:id/sections/:sId
+Update a section
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+{ title?, description?, start_date?, end_date?, budget?, order_index? }
+Response
+{ section: UpdatedSectionObject }
+Notes
+Use order_index to reorder stops.
+DELETE  /trips/:id/sections/:sId
+Delete a section
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+—
+Response
+{ message: 'Section deleted' }
+Notes
+5.5 Activities (System Catalogue)
+GET  /activities
+Browse/search activity catalogue
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+Query: q, type, city, country, max_cost, min_duration, page, limit
+Response
+{ activities: ActivityObject[], total }
+Notes
+GET  /activities/:id
+Get single activity detail
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+—
+Response
+{ activity: ActivityObject }
+Notes
+5.6 Trip Activities (User's planned activities)
+GET  /trips/:id/activities
+List activities planned for a trip
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+Query: section_id (optional filter)
+Response
+{ trip_activities: TripActivityObject[] }
+Notes
+POST  /trips/:id/activities
+Add an activity to a trip
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+{ activity_id, section_id?, scheduled_date?, scheduled_time?, actual_cost?, notes? }
+Response
+{ trip_activity: TripActivityObject }
+Notes
+PUT  /trips/:id/activities/:taId
+Update a trip activity
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+Same fields as POST, all optional
+Response
+{ trip_activity: UpdatedTripActivityObject }
+Notes
+DELETE  /trips/:id/activities/:taId
+Remove activity from trip
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+—
+Response
+{ message: 'Removed' }
+Notes
+5.7 Itinerary
+GET  /trips/:id/itinerary
+Get full structured itinerary (sections + activities)
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+Query: view=[list|calendar]
+Response
+{ trip, sections: [{ ...section, activities: TripActivityObject[] }] }
+Notes
+Primary endpoint for Itinerary View screen (S9).
+5.8 Expenses
+GET  /trips/:id/expenses
+List all expenses for a trip
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+Query: category, section_id, page, limit
+Response
+{ expenses: ExpenseObject[], subtotals: { category: amount }, grand_total }
+Notes
+POST  /trips/:id/expenses
+Add an expense
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+{ category, description, quantity?, unit_cost, section_id?, is_paid?, payment_status? }
+Response
+{ expense: ExpenseObject }
+Notes
+PUT  /trips/:id/expenses/:eId
+Update an expense
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+Same fields as POST, all optional
+Response
+{ expense: UpdatedExpenseObject }
+Notes
+DELETE  /trips/:id/expenses/:eId
+Delete an expense
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+—
+Response
+{ message: 'Deleted' }
+Notes
+GET  /trips/:id/budget-summary
+Get budget vs actual summary
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+—
+Response
+{ total_budget, total_spent, remaining, breakdown_by_category: {}, breakdown_by_section: {} }
+Notes
+Used for budget gauge and pie chart.
+GET  /trips/:id/invoice
+Download invoice as PDF
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+—
+Response
+Binary PDF stream
+Notes
+Content-Type: application/pdf. Filename: traveloop-invoice-{tripId}.pdf
+5.9 Checklist
+GET  /trips/:id/checklist
+Get packing checklist for a trip
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+—
+Response
+{ items: ChecklistItemObject[], categories: string[] }
+Notes
+POST  /trips/:id/checklist
+Add a checklist item
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+{ item_name, category?, order_index? }
+Response
+{ item: ChecklistItemObject }
+Notes
+PUT  /trips/:id/checklist/:itemId
+Update item (e.g. mark packed)
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+{ item_name?, category?, is_packed?, order_index? }
+Response
+{ item: UpdatedChecklistItemObject }
+Notes
+DELETE  /trips/:id/checklist/:itemId
+Delete a checklist item
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+—
+Response
+{ message: 'Deleted' }
+Notes
+DELETE  /trips/:id/checklist
+Reset entire checklist (unpack all)
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+—
+Response
+{ message: 'Checklist reset' }
+Notes
+Sets all is_packed=false, does not delete items.
+5.10 Trip Notes
+GET  /trips/:id/notes
+List notes for a trip
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+Query: section_id, sort=[date_asc|date_desc]
+Response
+{ notes: NoteObject[] }
+Notes
+POST  /trips/:id/notes
+Create a note
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+{ content, section_id? }
+Response
+{ note: NoteObject }
+Notes
+PUT  /trips/:id/notes/:nId
+Update a note
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+{ content?, section_id? }
+Response
+{ note: UpdatedNoteObject }
+Notes
+DELETE  /trips/:id/notes/:nId
+Delete a note
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+—
+Response
+{ message: 'Deleted' }
+Notes
+5.11 Destinations & Search
+GET  /destinations
+List/search destinations
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+Query: q, region, country, max_cost_index, page, limit
+Response
+{ destinations: DestinationObject[], total }
+Notes
+GET  /destinations/popular
+Get popular destinations for dashboard
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+Query: limit=8
+Response
+{ destinations: DestinationObject[] }
+Notes
+Used on Dashboard (S3).
+GET  /destinations/suggestions
+Autocomplete for trip creation
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+Query: query (min 2 chars)
+Response
+{ suggestions: [{ id, name, country, image_url }] }
+Notes
+GET  /search
+Unified search across cities and activities
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+Query: q, type=[city|activity|all], filters…
+Response
+{ cities: DestinationObject[], activities: ActivityObject[] }
+Notes
+Used on Activity/City Search Screen (S8).
+5.12 Community
+GET  /community/itineraries
+Browse public shared itineraries
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+Query: q, region, sort=[popular|recent], page, limit
+Response
+{ itineraries: PublicItineraryObject[], total }
+Notes
+Only trips with is_public=true.
+POST  /community/itineraries/:tripId/clone
+Clone a public trip into user's account
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+—
+Response
+{ trip: NewTripObject }
+Notes
+Deep copy: trip + sections + activities. cloned_from set to source tripId.
+5.13 Media Upload
+POST  /media/upload
+Upload image and get URL
+Field
+Value
+Auth Required
+Yes
+Request Body / Params
+multipart/form-data: { file, context=[avatar|cover|activity] }
+Response
+{ url: string }
+Notes
+Max size 5MB. Accepted types: jpg, png, webp. Upload to S3, return CDN URL.
+5.14 Admin
+GET  /admin/stats
+Platform-wide statistics
+Field
+Value
+Auth Required
+Admin
+Request Body / Params
+Query: from_date, to_date
+Response
+{ total_users, total_trips, trips_this_week, popular_cities: [], popular_activities: [], user_growth: [] }
+Notes
+GET  /admin/users
+List all users with management info
+Field
+Value
+Auth Required
+Admin
+Request Body / Params
+Query: q, status, page, limit
+Response
+{ users: AdminUserObject[], total }
+Notes
+DELETE  /admin/users/:id
+Deactivate / ban a user
+Field
+Value
+Auth Required
+Admin
+Request Body / Params
+—
+Response
+{ message: 'User deactivated' }
+Notes
+Soft delete only.
+GET  /admin/trips
+List all trips platform-wide
+Field
+Value
+Auth Required
+Admin
+Request Body / Params
+Query: q, status, user_id, page, limit
+Response
+{ trips: TripObject[], total }
+Notes
+6. Error Response Standard
+All errors follow a consistent envelope format:
+{ "error": { "code": "VALIDATION_ERROR", "message": "Email is required.", "details": [] } }
+HTTP Status
+Code
+When to Use
+200 OK
+SUCCESS
+Standard success
+201 Created
+CREATED
+Resource created (POST)
+400 Bad Request
+VALIDATION_ERROR
+Missing/invalid input fields
+401 Unauthorized
+UNAUTHORIZED
+Missing or invalid JWT
+403 Forbidden
+FORBIDDEN
+Valid auth but insufficient permission
+404 Not Found
+NOT_FOUND
+Resource does not exist or is private
+409 Conflict
+CONFLICT
+Duplicate (email already registered)
+413 Payload Too Large
+FILE_TOO_LARGE
+Upload exceeds 5MB
+422 Unprocessable
+BUSINESS_RULE_ERROR
+Dates out of range, budget exceeded, etc.
+500 Internal Error
+SERVER_ERROR
+Unexpected server failure
+7. Authentication & Security
+7.1 JWT Flow
+Token issued on /auth/login and /auth/register
+Include in all protected requests: Authorization: Bearer <token>
+Token expiry: 7 days (refresh with re-login or silent refresh endpoint)
+Admin role checked via role field in decoded JWT payload
+7.2 Route Guards (Frontend)
+Route Pattern
+Guard
+Redirect if Fails
+/dashboard, /trips/*, /profile, /community
+isAuthenticated
+/login
+/admin/*
+isAdmin
+/dashboard
+/community/:id (view only)
+none (public)
+—
+7.3 Password Policy
+Minimum 8 characters
+At least one uppercase, one lowercase, one number
+Hashed with bcrypt (cost factor 12)
+8. Non-Functional Requirements
+Category
+Requirement
+Performance
+All API responses < 500ms at p95. Itinerary and budget endpoints < 800ms.
+Pagination
+All list endpoints paginated. Default limit: 20. Max limit: 100.
+Search
+Debounce on frontend (300ms). Autocomplete endpoints must respond < 200ms.
+File Uploads
+Max 5MB per file. Resize avatars to 200×200px server-side.
+Database
+Use indexes on: user_id FK columns, trips.status, activities.city/type, notes.trip_id.
+CORS
+Allow origins: localhost:3000 (dev), production domain. Credentials: true.
+Rate Limiting
+Auth endpoints: 10 req/min per IP. General API: 200 req/min per user.
+Logging
+Log all 4xx/5xx with request ID, user ID, endpoint, timestamp.
+Soft Deletes
+Users and trips soft-deleted only. Hard delete only on admin explicit action.
+Responsiveness
+Frontend: mobile breakpoint at 768px. All screens must render on 375px width.
+9. Frontend Developer Notes
+9.1 State Management
+Auth token stored in memory + httpOnly cookie (or localStorage with XSS caution)
+Global state: currentUser, authToken
+Trip context: activeTrip, activeSections, activeActivities
+Use optimistic UI for checklist toggles and note saves
+9.2 Component → Endpoint Map
+Screen
+Primary API Calls on Mount
+Login
+—
+Register
+—
+Dashboard (S3)
+GET /trips?limit=3, GET /destinations/popular
+Create Trip (S4)
+GET /destinations/suggestions (on type)
+Build Itinerary (S5)
+GET /trips/:id/sections
+Trip List (S6)
+GET /trips (with status)
+Profile (S7)
+GET /users/me, GET /trips?status=upcoming, GET /trips?status=completed
+Activity Search (S8)
+GET /search?q=
+Itinerary View (S9)
+GET /trips/:id/itinerary, GET /trips/:id/budget-summary
+Community (S10)
+GET /community/itineraries
+Packing List (S11)
+GET /trips/:id/checklist
+Admin (S12)
+GET /admin/stats, GET /admin/users, GET /admin/trips
+Notes (S13)
+GET /trips/:id/notes
+Expense/Invoice (S14)
+GET /trips/:id/expenses, GET /trips/:id/budget-summary
+9.3 Date Handling
+All dates sent/received in ISO 8601 format: YYYY-MM-DD
+All timestamps in UTC, display converted to user's local timezone
+Trip status (ongoing/upcoming/completed) computed client-side from start_date/end_date vs today
+9.4 Empty States
+Dashboard with no trips → show 'Plan your first trip' banner + CTA
+Activity search with no results → 'No results found. Try a different search.'
+Community with no posts → 'No shared itineraries yet.'
+Checklist empty → show category headers with 'Add item' prompt
+10. Suggested Build Order (Hackathon Priority)
+Phase
+Priority
+Screens / Endpoints
+Phase 1 — Core Auth + Trip CRUD
+Must Have
+S1, S2, S3, S4, S6 + auth & trips endpoints
+Phase 2 — Itinerary Engine
+Must Have
+S5, S9 + sections, activities, itinerary endpoints
+Phase 3 — Budget & Expenses
+Must Have
+S14 + expenses & budget-summary endpoints
+Phase 4 — Discovery
+Should Have
+S8 + search, destinations endpoints
+Phase 5 — Checklists & Notes
+Should Have
+S11, S13 + checklist & notes endpoints
+Phase 6 — Community
+Should Have
+S10 + community endpoints
+Phase 7 — Profile & UX Polish
+Nice to Have
+S7 + media upload, profile PUT
+Phase 8 — Admin Dashboard
+Nice to Have
+S12 + admin endpoints
+Traveloop PRD v1.0 — Confidential — Hackathon Use Only
